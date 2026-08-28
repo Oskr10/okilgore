@@ -24,7 +24,11 @@
 .atmos {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  /* Behind everything. This MUST stay negative: an earlier version used
+     z-index 0 and lifted .masthead/main/.colophon to 1 to sit above it,
+     which silently overrode the masthead's position:sticky and z-index:100
+     and left the theme panel buried under the page. */
+  z-index: -1;
   pointer-events: none;
   overflow: hidden;
 
@@ -52,9 +56,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  inline-size: 900px;
-  block-size: 900px;
-  margin: -450px 0 0 -450px;
+  inline-size: 630px;
+  block-size: 630px;
+  margin: -315px 0 0 -315px;
   background: radial-gradient(
     circle closest-side,
     var(--accent) 0%,
@@ -85,11 +89,6 @@
 
 .section--sunk > * { position: relative; }
 
-/* Content sits above the fixed layer. */
-.masthead,
-main,
-.colophon { position: relative; z-index: 1; }
-
 /* --------------------------------------------------------------------------
    Touch / no-pointer: the glow parks at per-section positions instead of
    following anything. atmosphere.js sets --glow-x/--glow-y on scroll into
@@ -99,9 +98,9 @@ main,
 
 @media (hover: none), (pointer: coarse) {
   .atmos__glow {
-    inline-size: 120vmax;
-    block-size: 120vmax;
-    margin: calc(-60vmax) 0 0 calc(-60vmax);
+    inline-size: 84vmax;
+    block-size: 84vmax;
+    margin: calc(-42vmax) 0 0 calc(-42vmax);
     opacity: 0.4;
     transition: transform 1.2s var(--ease-in-out);
     will-change: auto;

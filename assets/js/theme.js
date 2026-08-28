@@ -158,12 +158,16 @@
      --------------------------------------------------------------------- */
 
   const known = options.map((option) => option.dataset.themeValue);
-  const initial = known.includes(stored()) ? stored() : 'auto';
+
+  /* There is no "auto" swatch: a control that mirrors another option is just
+     a second way to pick the same palette. System preference is still
+     respected, but as the FIRST-VISIT DEFAULT rather than a mode — the
+     inline script in <head> picks Ink or Paper from prefers-color-scheme
+     before first paint, and this only persists an explicit choice. So a
+     visitor who never touches the wheel keeps following their system on
+     every future visit. */
+  const fromSystem = () => (systemDark.matches ? 'ink' : 'paper');
+  const initial = known.includes(stored()) ? stored() : fromSystem();
 
   apply(initial, false);
-
-  // While on "auto", follow the system if it changes mid-session.
-  systemDark.addEventListener('change', () => {
-    if (root.getAttribute('data-theme') === 'auto') syncBrowserChrome();
-  });
 })();

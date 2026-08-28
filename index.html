@@ -34,8 +34,11 @@
 <script>
   document.documentElement.classList.add('js');
   try {
+    // First visit follows the operating system; after that the stored
+    // choice wins. Set before first paint so no palette ever flashes.
     var t = localStorage.getItem('ok-theme');
-    if (t) document.documentElement.setAttribute('data-theme', t);
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'ink' : 'paper';
+    document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
 
@@ -125,11 +128,6 @@
 
           <div class="theme__wheel" role="radiogroup" aria-label="Colour theme">
             <button class="theme__option" type="button" role="radio" aria-checked="true" tabindex="0"
-                    data-theme-value="auto"
-                    style="--chip-paper:#f4f1ea;--chip-ink:#16150f;--chip-accent:#14130f">
-              <span class="theme__chip" aria-hidden="true"></span>Auto
-            </button>
-            <button class="theme__option" type="button" role="radio" aria-checked="false" tabindex="-1"
                     data-theme-value="paper"
                     style="--chip-paper:#f4f1ea;--chip-ink:#16150f;--chip-accent:#b03a1e">
               <span class="theme__chip" aria-hidden="true"></span>Paper

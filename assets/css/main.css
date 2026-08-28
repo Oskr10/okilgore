@@ -38,6 +38,9 @@
 
      --card-bg exists so Opening Hand cards have a guaranteed OPAQUE surface.
      The pattern must never show through a card.                            */
+  /* Dark palettes need a bigger step to read as texture at all, so the
+     strength is a token rather than a constant. Each palette sets it. */
+  --pattern-mix:       97%;
   --pattern:           transparent;   /* fallback: no pattern at all */
   --pattern-sunk:      transparent;
   --card-bg:           var(--paper-raised);
@@ -119,11 +122,12 @@
     --paper-raised: #201e18;
     --ink:          #efebe0;
     --ink-2:        #b4ae9e;
-    --ink-3:        #8d8878;
+    --ink-3:        #948f7f;
     --rule:         #2e2c25;
     --rule-strong:  #45423a;
-    --accent:       #e4643f;
-    --accent-wash:  rgba(228, 100, 63, 0.11);
+    --accent:       #e56a47;
+    --accent-wash:  rgba(229, 106, 71, 0.11);
+    --pattern-mix:  94%;
   }
 }
 
@@ -155,6 +159,7 @@
   --rule-strong:  #b9b3a3;
   --accent:       #b03a1e;
   --accent-wash:  rgba(176, 58, 30, 0.08);
+  --pattern-mix:  97%;
 }
 
 /* Blueprint — cool grey paper, drafting-ink blue. */
@@ -169,6 +174,7 @@
   --rule-strong:  #a6b1c0;
   --accent:       #2b4a9b;
   --accent-wash:  rgba(43, 74, 155, 0.08);
+  --pattern-mix:  97%;
 }
 
 /* Moss — warm sand paper, deep green. */
@@ -183,6 +189,7 @@
   --rule-strong:  #b4b09c;
   --accent:       #3f6b3a;
   --accent-wash:  rgba(63, 107, 58, 0.09);
+  --pattern-mix:  97%;
 }
 
 /* Ink — warm dark, ember. */
@@ -192,11 +199,12 @@
   --paper-raised: #201e18;
   --ink:          #efebe0;
   --ink-2:        #b4ae9e;
-  --ink-3:        #8d8878;
+  --ink-3:        #948f7f;
   --rule:         #2e2c25;
   --rule-strong:  #45423a;
-  --accent:       #e4643f;
-  --accent-wash:  rgba(228, 100, 63, 0.11);
+  --accent:       #e56a47;
+  --accent-wash:  rgba(229, 106, 71, 0.11);
+  --pattern-mix:  94%;
 }
 
 /* Carbon — cool near-black, signal amber. */
@@ -206,11 +214,12 @@
   --paper-raised: #1b2028;
   --ink:          #e6ebf2;
   --ink-2:        #a3adbb;
-  --ink-3:        #7e8995;
+  --ink-3:        #858f9b;
   --rule:         #262c35;
   --rule-strong:  #3a424e;
   --accent:       #e0a020;
   --accent-wash:  rgba(224, 160, 32, 0.11);
+  --pattern-mix:  94%;
 }
 
 /* --------------------------------------------------------------------------
@@ -462,7 +471,7 @@ a {
 
 @supports (color: color-mix(in srgb, red 50%, blue)) {
   :root {
-    --pattern:      color-mix(in srgb, var(--paper) 97%, var(--ink));
-    --pattern-sunk: color-mix(in srgb, var(--paper-sunk) 97%, var(--ink));
+    --pattern:      color-mix(in srgb, var(--paper) var(--pattern-mix), var(--ink));
+    --pattern-sunk: color-mix(in srgb, var(--paper-sunk) var(--pattern-mix), var(--ink));
   }
 }
