@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Oscar Kilgore — Web Developer, WordPress &amp; Shopify</title>
-<meta name="description" content="Oscar Kilgore is a web developer working in WordPress, Shopify, e-commerce, technical troubleshooting and website support. Based in Honduras, available for remote work.">
+<title>Oscar Kilgore — Web Designer &amp; Developer</title>
+<meta name="description" content="Oscar Kilgore is a web designer and developer working in WordPress, Shopify and production support. Based in Honduras, available for remote work.">
 <meta name="author" content="Oscar Kilgore">
 
 <!-- TODO: set the canonical and og:url once the domain is live. -->
 <link rel="canonical" href="https://example.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Oscar Kilgore — Web Developer, WordPress &amp; Shopify">
-<meta property="og:description" content="I build websites — and fix them when things get complicated. WordPress, Shopify, e-commerce, WebOps and technical support.">
+<meta property="og:title" content="Oscar Kilgore — Web Designer &amp; Developer">
+<meta property="og:description" content="I design and build websites — and fix them when things get complicated. WordPress, Shopify, WebOps and technical support.">
 <meta property="og:url" content="https://example.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
@@ -47,7 +47,7 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Oscar Kilgore",
-  "jobTitle": "Web Developer",
+  "jobTitle": "Web Designer and Developer",
   "email": "mailto:kilgore2010@gmail.com",
   "address": { "@type": "PostalAddress", "addressCountry": "HN" },
   "knowsAbout": ["WordPress", "Shopify", "WooCommerce", "PHP", "JavaScript", "Web operations", "Website security"]
@@ -104,13 +104,14 @@
             <span class="visually-hidden">Contact</span>
           </a>
         </li>
+        <!-- TODO: add resume/oscar-kilgore-resume.pdf, then uncomment.
         <li>
           <a class="nav__link" href="resume/oscar-kilgore-resume.pdf">
             <span class="nav__roll" aria-hidden="true"><span>Resume</span><span>Resume</span></span>
             <span class="visually-hidden">Resume (PDF)</span>
-            <span class="pending" aria-hidden="true">TBA</span>
           </a>
         </li>
+        -->
       </ul>
     </nav>
 
@@ -144,7 +145,7 @@
             </button>
             <button class="theme__option" type="button" role="radio" aria-checked="false" tabindex="-1"
                     data-theme-value="ink"
-                    style="--chip-paper:#14130f;--chip-ink:#efebe0;--chip-accent:#e4643f">
+                    style="--chip-paper:#14130f;--chip-ink:#efebe0;--chip-accent:#e56a47">
               <span class="theme__chip" aria-hidden="true"></span>Ink
             </button>
             <button class="theme__option" type="button" role="radio" aria-checked="false" tabindex="-1"
@@ -154,7 +155,7 @@
             </button>
           </div>
 
-          <p class="theme__note mono">Six palettes, eleven custom properties. No component knows a theme exists.</p>
+          <p class="theme__note mono">Five palettes, eleven custom properties. No component knows a theme exists.</p>
         </div>
       </div>
 
@@ -172,7 +173,9 @@
   <a class="drawer__link" href="#capabilities">Capabilities <span class="mono">02</span></a>
   <a class="drawer__link" href="#about">About <span class="mono">03</span></a>
   <a class="drawer__link" href="#contact">Contact <span class="mono">04</span></a>
-  <a class="drawer__link" href="resume/oscar-kilgore-resume.pdf">Resume <span class="mono">PDF — TBA</span></a>
+  <!-- TODO: uncomment with the nav item above once the PDF exists.
+  <a class="drawer__link" href="resume/oscar-kilgore-resume.pdf">Resume <span class="mono">PDF</span></a>
+  -->
 </div>
 
 <main id="main">
@@ -209,17 +212,17 @@
         <a class="btn btn--quiet" href="#about">About me</a>
       </div>
 
-      <!-- REPLACE: three real screenshots. The dominant one carries the page;
-           the two crops overlap it from the right at 64em and up. -->
+      <!-- Hash Kitchen carries the composition; Restaurantology and the Hash
+           mobile view overlap it from the right at 64em and up. -->
       <div class="hero__visual">
         <figure class="shot hero__shot--main">
-          <img src="assets/images/placeholders/hero-a.svg" alt="Placeholder: main landing page screenshot" width="1600" height="1000" fetchpriority="high" decoding="async">
+          <img src="assets/images/projects/hero-main-hash.jpg" alt="Hash Kitchen Back to School Brunch Tour landing page" width="1166" height="729" fetchpriority="high" decoding="async">
         </figure>
         <figure class="shot hero__shot--b">
-          <img src="assets/images/placeholders/hero-b.svg" alt="Placeholder: interface detail crop" width="800" height="600" loading="lazy" decoding="async">
+          <img src="assets/images/projects/hero-detail-restaurantology.jpg" alt="Restaurantology Summit 2026 landing page" width="370" height="278" loading="lazy" decoding="async">
         </figure>
         <figure class="shot hero__shot--c">
-          <img src="assets/images/placeholders/hero-c.svg" alt="Placeholder: mobile screenshot" width="520" height="1040" loading="lazy" decoding="async">
+          <img src="assets/images/projects/hero-mobile-hash.jpg" alt="Hash Kitchen Back to School Brunch Tour on mobile" width="217" height="434" loading="lazy" decoding="async">
         </figure>
       </div>
 
@@ -241,18 +244,20 @@
     <!-- 01 — asymmetric split -------------------------------------------- -->
     <article class="project project--split">
       <div class="project__body">
-        <p class="project__eyebrow mono"><span>01</span><span class="mono--accent">Landing page</span></p>
-        <h3 class="project__title">[LANDING PAGE 01 — PROJECT NAME]</h3>
-        <p class="project__desc">[SHORT DESCRIPTION — one or two sentences on what this page needed to do.]</p>
+        <p class="project__eyebrow mono"><span>01</span><span class="mono--accent">Landing page / Event</span></p>
+        <h3 class="project__title">Restaurantology Summit 2026</h3>
+        <p class="project__desc">Implemented a custom event landing page for Restaurantology Summit 2026, translating a highly art-directed design into a responsive WordPress experience with an interactive agenda, speaker content and event information.</p>
         <dl class="project__meta">
-          <div><dt>Role</dt><dd>Web design / UI / Implementation</dd></div>
-          <div><dt>Platform</dt><dd>[PLATFORM]</dd></div>
+          <div><dt>Role</dt><dd>Web implementation / Responsive UI / Custom frontend</dd></div>
+          <div><dt>Platform</dt><dd>WordPress / Salient</dd></div>
         </dl>
         <a class="project__cta" href="projects/landing-page-01/">View project <span class="project__cta-arrow" aria-hidden="true">→</span></a>
       </div>
       <div class="project__figure">
-        <figure class="shot">
-          <img src="assets/images/placeholders/landing-01.svg" alt="Placeholder: landing page 01 screenshot" width="1600" height="1100" loading="lazy" decoding="async">
+        <!-- Supplied crop is 369px wide. Capped rather than upscaled into the
+             full bleed slot; raise the cap when a larger capture arrives. -->
+        <figure class="shot shot--source-small">
+          <img src="assets/images/projects/landing-01-restaurantology.jpg" alt="Restaurantology Summit 2026 event landing page" width="369" height="254" loading="lazy" decoding="async">
         </figure>
       </div>
     </article>
@@ -261,21 +266,22 @@
     <article class="project project--bleed">
       <div class="project__head">
         <div>
-          <p class="project__eyebrow mono"><span>02</span><span class="mono--accent">Landing page</span></p>
-          <h3 class="project__title">[LANDING PAGE 02 — PROJECT NAME]</h3>
+          <p class="project__eyebrow mono"><span>02</span><span class="mono--accent">Interactive landing page</span></p>
+          <h3 class="project__title">Hash Kitchen — Back to School Brunch Tour</h3>
         </div>
-        <p class="project__desc">[SHORT DESCRIPTION.]</p>
+        <p class="project__desc">Built a playful promotional landing page for the Hash Kitchen Back to School Brunch Tour, including a custom scroll-driven bus animation that travels through the tour route as visitors move down the page.</p>
       </div>
 
       <figure class="shot">
-        <img src="assets/images/placeholders/landing-02.svg" alt="Placeholder: landing page 02 screenshot" width="2400" height="1200" loading="lazy" decoding="async">
+        <img src="assets/images/projects/landing-02-hash.jpg" alt="Hash Kitchen Back to School Brunch Tour landing page" width="1167" height="584" loading="lazy" decoding="async">
       </figure>
 
       <div class="project__foot">
         <dl class="project__meta">
-          <div><dt>Role</dt><dd>[ROLE]</dd></div>
-          <div><dt>Platform</dt><dd>[PLATFORM]</dd></div>
-          <div><dt>Year</dt><dd>[YEAR]</dd></div>
+          <div><dt>Role</dt><dd>Web implementation / Interaction development</dd></div>
+          <div><dt>Platform</dt><dd>WordPress / Salient</dd></div>
+          <!-- TODO: add <div><dt>Year</dt><dd>…</dd></div> once the campaign year is confirmed. -->
+          <div><dt>Custom code</dt><dd>CSS / JavaScript / SVG</dd></div>
         </dl>
         <a class="project__cta" href="projects/landing-page-02/">View project <span class="project__cta-arrow" aria-hidden="true">→</span></a>
       </div>
@@ -284,20 +290,21 @@
     <!-- 03 — responsive pair ---------------------------------------------- -->
     <article class="project project--pair">
       <div class="project__body">
-        <p class="project__eyebrow mono"><span>03</span><span class="mono--accent">Landing page</span></p>
-        <h3 class="project__title">[LANDING PAGE 03 — PROJECT NAME]</h3>
-        <p class="project__desc">[SHORT DESCRIPTION.]</p>
+        <p class="project__eyebrow mono"><span>03</span><span class="mono--accent">Shopify / Dynamic template</span></p>
+        <h3 class="project__title">Cresco Resco — Location Template</h3>
+        <p class="project__desc">Built a reusable Shopify location system that turns structured metaobject data into complete store pages, including location details, maps, services, FAQs and responsive content.</p>
         <dl class="project__meta">
-          <div><dt>Role</dt><dd>Web design / Responsive UI / Implementation</dd></div>
+          <div><dt>Role</dt><dd>Design / Build / Back-end integration</dd></div>
+          <div><dt>Platform</dt><dd>Shopify</dd></div>
         </dl>
         <a class="project__cta" href="projects/landing-page-03/">View project <span class="project__cta-arrow" aria-hidden="true">→</span></a>
       </div>
       <div class="project__pair">
         <figure class="shot project__pair-desktop">
-          <img src="assets/images/placeholders/landing-03.svg" alt="Placeholder: landing page 03, desktop view" width="1600" height="1000" loading="lazy" decoding="async">
+          <img src="assets/images/projects/landing-03-cresco-desktop.jpg" alt="Cresco Resco Fresno Shopify location page" width="907" height="567" loading="lazy" decoding="async">
         </figure>
         <figure class="shot project__pair-mobile">
-          <img src="assets/images/placeholders/landing-03-mobile.svg" alt="Placeholder: landing page 03, mobile view" width="520" height="1040" loading="lazy" decoding="async">
+          <img src="assets/images/projects/landing-03-cresco-mobile.jpg" alt="Cresco Resco Fresno location page on mobile" width="108" height="216" loading="lazy" decoding="async">
         </figure>
       </div>
     </article>
@@ -316,12 +323,12 @@
       <article class="morework__item">
         <a href="projects/website-01/">
           <figure class="shot">
-            <img src="assets/images/placeholders/website-01.svg" alt="Placeholder: full website 01 screenshot" width="1200" height="900" loading="lazy" decoding="async">
+            <img src="assets/images/projects/website-01-eastern-autowerks.jpg" alt="Eastern Autowerks BMW repair website" width="1053" height="790" loading="lazy" decoding="async">
           </figure>
           <p class="project__eyebrow mono"><span>04</span><span class="mono--accent">Full website</span></p>
-          <h3 class="morework__title">[FULL WEBSITE 01 — PROJECT NAME]</h3>
-          <p class="morework__desc">[SHORT DESCRIPTION.]</p>
-          <p class="morework__meta mono"><span>Role / [ROLE]</span><span>Platform / [PLATFORM]</span></p>
+          <h3 class="morework__title">Eastern Autowerks</h3>
+          <p class="morework__desc">Designed and built a WordPress website for a BMW-focused automotive shop, organizing repair and performance services around a dark, performance-oriented visual direction and clear appointment calls to action.</p>
+          <p class="morework__meta mono"><span>Role / Web design + WordPress build</span><span>Platform / WordPress</span></p>
           <span class="project__cta">View project <span class="project__cta-arrow" aria-hidden="true">→</span></span>
         </a>
       </article>
@@ -329,12 +336,12 @@
       <article class="morework__item">
         <a href="projects/website-02/">
           <figure class="shot">
-            <img src="assets/images/placeholders/website-02.svg" alt="Placeholder: full website 02 screenshot" width="1200" height="900" loading="lazy" decoding="async">
+            <img src="assets/images/projects/website-02-advanced-bark.jpg" alt="Advanced Bark Blowing service website" width="639" height="479" loading="lazy" decoding="async">
           </figure>
           <p class="project__eyebrow mono"><span>05</span><span class="mono--accent">Full website</span></p>
-          <h3 class="morework__title">[FULL WEBSITE 02 — PROJECT NAME]</h3>
-          <p class="morework__desc">[SHORT DESCRIPTION.]</p>
-          <p class="morework__meta mono"><span>Role / [ROLE]</span><span>Platform / [PLATFORM]</span></p>
+          <h3 class="morework__title">Advanced Bark Blowing</h3>
+          <p class="morework__desc">Designed and built a WordPress service website that combines local-service messaging, landscaping imagery, bark-product options and quote generation into a responsive lead-focused experience.</p>
+          <p class="morework__meta mono"><span>Role / Web design + WordPress build</span><span>Platform / WordPress</span></p>
           <span class="project__cta">View project <span class="project__cta-arrow" aria-hidden="true">→</span></span>
         </a>
       </article>
@@ -432,10 +439,13 @@
   <section class="section shell" id="about" aria-labelledby="about-title">
     <div class="about__inner">
 
-      <!-- Optional. Delete this figure and the section still composes. -->
+      <!-- TODO: drop a portrait photograph in and uncomment. Hidden rather
+           than shown as a placeholder, so the section always looks finished.
+           The About layout composes correctly without it.
       <figure class="shot about__portrait">
-        <img src="assets/images/placeholders/portrait.svg" alt="Placeholder: portrait photograph of Oscar Kilgore" width="800" height="1000" loading="lazy" decoding="async">
+        <img src="assets/images/projects/portrait.jpg" alt="Oscar Kilgore" width="800" height="1000" loading="lazy" decoding="async">
       </figure>
+      -->
 
       <div class="about__body">
         <h2 class="section__title mb-5" id="about-title">About / Oscar</h2>
@@ -652,9 +662,11 @@
               <span data-magnetic-inner>Let&rsquo;s talk</span>
               <span class="btn__arrow" aria-hidden="true">↗</span>
             </a>
+            <!-- TODO: uncomment once the PDF exists.
             <a class="btn btn--quiet" href="resume/oscar-kilgore-resume.pdf">
-              View resume <span class="pending">TBA</span>
+              View resume <span aria-hidden="true">↗</span>
             </a>
+            -->
           </div>
 
           <dl class="contact__meta mono">
@@ -671,12 +683,12 @@
             <span class="contact__channel-value">kilgore2010@gmail.com</span>
           </a>
 
-          <a class="contact__channel" href="#" rel="noopener">
+          <!-- TODO: add the LinkedIn URL and uncomment.
+          <a class="contact__channel" href="https://www.linkedin.com/in/…" target="_blank" rel="noopener noreferrer" data-cursor="external">
             <span class="mono">LinkedIn</span>
-            <span class="contact__channel-value">
-              [ add profile URL ]
-            </span>
+            <span class="contact__channel-value">LinkedIn <span class="contact__channel-ext" aria-hidden="true">↗</span></span>
           </a>
+          -->
 
           <a class="contact__channel" href="https://github.com/Oskr10" target="_blank" rel="noopener" data-cursor="external">
             <span class="mono">GitHub</span>
@@ -686,10 +698,12 @@
             </span>
           </a>
 
+          <!-- TODO: uncomment once the PDF exists.
           <a class="contact__channel" href="resume/oscar-kilgore-resume.pdf">
             <span class="mono">Resume</span>
-            <span class="contact__channel-value">PDF <span class="pending">TBA</span></span>
+            <span class="contact__channel-value">PDF</span>
           </a>
+          -->
 
         </div>
 

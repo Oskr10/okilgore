@@ -1114,7 +1114,9 @@ a:hover .project__cta-arrow { transform: translateX(0.35rem); }
 /* --- 03 pairs desktop with mobile --------------------------------------- */
 
 .project__pair { position: relative; }
-.project__pair-mobile { margin-top: var(--sp-4); max-inline-size: 60%; }
+/* Capped near the 108px native width of the supplied crop at every size,
+   not just on desktop — it is a reference detail, not a hero image. */
+.project__pair-mobile { margin-top: var(--sp-4); max-inline-size: min(60%, 8rem); }
 
 /* --------------------------------------------------------------------------
    More work — the two full websites
@@ -1255,3 +1257,21 @@ a:hover .project__cta-arrow { transform: translateX(0.35rem); }
 }
 
 .contact__label { margin-bottom: var(--sp-4); }
+
+/* --------------------------------------------------------------------------
+   Source-resolution caps
+   --------------------------------------------------------------------------
+   Some supplied screenshots are narrower than the slot they occupy. Rather
+   than upscale them into a soft, obviously-stretched image, the rendered
+   width is capped near the native size and the figure is aligned to the end
+   of its slot so the composition still reads.
+
+   These caps exist because of the source file, not the design. When a
+   higher-resolution capture replaces the image, remove the modifier and the
+   layout returns to full width with no other change.
+   -------------------------------------------------------------------------- */
+
+.shot--source-small {
+  max-inline-size: 34rem;   /* ~544px against a 369px source */
+  margin-inline-start: auto;
+}

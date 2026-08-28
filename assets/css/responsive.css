@@ -257,7 +257,9 @@
     right: 0;
     bottom: -8%;
     inline-size: 26%;
-    max-inline-size: none;
+    /* The supplied mobile crop is 108px wide. Capping near native keeps it
+       crisp; it is a reference detail, not a hero image. */
+    max-inline-size: 8rem;
     margin-top: 0;
     z-index: 2;
   }

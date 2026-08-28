@@ -195,3 +195,33 @@
 
   .pp-next__link { grid-template-columns: 8rem 1fr; }
 }
+
+/* --------------------------------------------------------------------------
+   Additions for real project content
+   -------------------------------------------------------------------------- */
+
+.pp-hero__live { margin-bottom: var(--sp-6); }
+
+.pp-hero__live a {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+}
+
+/* Notes under a figure or diagram — quieter than body copy. */
+.pp-caption {
+  margin-top: var(--sp-3);
+  color: var(--ink-3);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* Native width of the supplied Cresco mobile crop is 108px. Shown at size
+   rather than upscaled; it is a reference detail beside the desktop view. */
+.shot--source-tiny { max-inline-size: 7rem; }
+
+@media (min-width: 48em) {
+  .pp-figures--pair { align-items: end; }
+}
