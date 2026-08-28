@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Placeholder: developer tools panel with an injected iframe node highlighted">
+  <rect width="1200" height="750" fill="#ece8de"/>
+  <!-- toolbar -->
+  <rect x="0" y="0" width="1200" height="52" fill="#16150f"/>
+  <g fill="#6e6a5b" font-family="monospace" font-size="17">
+    <text x="32" y="33" fill="#f4f1ea">Elements</text>
+    <text x="150" y="33">Console</text>
+    <text x="258" y="33">Network</text>
+    <text x="384" y="33">Sources</text>
+  </g>
+  <!-- DOM tree lines -->
+  <g fill="#4a473d" font-family="monospace" font-size="19">
+    <text x="40" y="110">&#60;body&#62;</text>
+    <text x="72" y="150">&#60;header class="site-header"&#62;…&#60;/header&#62;</text>
+    <text x="72" y="190">&#60;main id="content"&#62;</text>
+    <text x="104" y="230">&#60;article&#62;…&#60;/article&#62;</text>
+    <text x="72" y="270">&#60;/main&#62;</text>
+  </g>
+  <!-- highlighted injected node -->
+  <rect x="56" y="292" width="1000" height="96" fill="#b03a1e" opacity="0.12"/>
+  <rect x="56" y="292" width="3" height="96" fill="#b03a1e"/>
+  <g font-family="monospace" font-size="19" fill="#b03a1e">
+    <text x="80" y="326">&#60;iframe src="hxxps://[redacted]" style="position:fixed;</text>
+    <text x="80" y="358">inset:0;z-index:2147483647"&#62;&#60;/iframe&#62;</text>
+  </g>
+  <g fill="#4a473d" font-family="monospace" font-size="19">
+    <text x="40" y="428">&#60;/body&#62;</text>
+  </g>
+  <!-- console panel -->
+  <rect x="0" y="470" width="1200" height="280" fill="#e2ddd1"/>
+  <line x1="0" y1="470" x2="1200" y2="470" stroke="#b9b3a3" stroke-width="1"/>
+  <g font-family="monospace" font-size="18" fill="#6e6a5b">
+    <text x="40" y="512">&#62; document.querySelectorAll('iframe').length</text>
+    <text x="40" y="548" fill="#16150f">&#8592; 1</text>
+    <text x="40" y="596">&#62; getComputedStyle($0).zIndex</text>
+    <text x="40" y="632" fill="#16150f">&#8592; "2147483647"</text>
+  </g>
+  <!-- label -->
+  <rect x="0" y="700" width="1200" height="50" fill="#16150f"/>
+  <text x="32" y="732" font-family="monospace" font-size="18" fill="#f4f1ea" letter-spacing="2">01 / PLACEHOLDER — REPLACE WITH SANITIZED DEVTOOLS CAPTURE</text>
+</svg>

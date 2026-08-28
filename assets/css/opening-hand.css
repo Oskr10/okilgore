@@ -1,0 +1,621 @@
+/* ==========================================================================
+   opening-hand.css — the Opening Hand section and Investigation Mode
+   Oscar Kilgore — portfolio
+   --------------------------------------------------------------------------
+   Loaded after components.css. Uses only the existing design tokens; this
+   file introduces no colours, no type sizes and no spacing values of its own.
+
+   Layout note: the fan geometry is expressed entirely in CSS. JavaScript
+   writes two unitless numbers per card — --card-i (position 0..6) and
+   --card-lift (distance from the middle) — and every unit, angle and
+   breakpoint value lives here. So the hand can be re-tuned, or the hand size
+   changed, without touching the logic.
+   ========================================================================== */
+
+.oh { position: relative; }
+
+.oh__intro {
+  max-width: var(--measure);
+  margin-bottom: var(--sp-6);
+}
+
+.oh__lead { font-size: var(--fs-lead); line-height: var(--lh-normal); color: var(--ink); }
+.oh__sub  { margin-top: var(--sp-3); color: var(--ink-3); }
+
+/* --------------------------------------------------------------------------
+   Controls
+   -------------------------------------------------------------------------- */
+
+.oh__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-4) var(--sp-6);
+  padding-block: var(--sp-4);
+  border-top: var(--hairline) solid var(--rule);
+  border-bottom: var(--hairline) solid var(--rule);
+  margin-bottom: var(--sp-6);
+}
+
+.oh__mulligan {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-5);
+  background-color: var(--ink);
+  color: var(--paper);
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.oh__mulligan:hover { background-color: var(--accent); }
+.oh__mulligan:active { transform: scale(0.985); }
+.oh__mulligan[disabled] { opacity: 0.5; cursor: default; }
+
+.oh__reload {
+  display: inline-block;
+  transition: transform var(--dur-slow) var(--ease-spring);
+}
+
+.oh__mulligan:hover .oh__reload { transform: rotate(180deg); }
+
+.oh__counts {
+  display: flex;
+  gap: var(--sp-5);
+  margin-left: auto;
+}
+
+/* Mulligan annotations. One at a time, never both. */
+.oh__aside {
+  flex-basis: 100%;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.oh__aside[hidden] { display: none; }
+
+/* --------------------------------------------------------------------------
+   The hand — mobile first: a snap strip, not a shrunken fan
+   -------------------------------------------------------------------------- */
+
+.oh-hand {
+  --hand-card-w: 150px;
+  --hand-card-h: 212px;
+  --hand-n: 7;
+
+  display: flex;
+  gap: var(--sp-3);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  /* Break the page rail so cards scroll off the physical edge. */
+  margin-inline: calc(-1 * var(--page-x));
+  padding-inline: var(--page-x);
+  padding-block: var(--sp-2) var(--sp-5);
+  scroll-padding-inline-start: var(--page-x);
+  list-style: none;
+}
+
+.oh-hand__slot {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* --------------------------------------------------------------------------
+   Card
+   -------------------------------------------------------------------------- */
+
+.oh-card {
+  position: relative;
+  display: block;
+  inline-size: var(--hand-card-w);
+  block-size: var(--hand-card-h);
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  perspective: 900px;
+  text-align: left;
+
+  /* Deal state. The hand sets these to their resting values once dealt. */
+  --deal-y: 22px;
+  --deal-s: 0.96;
+  opacity: 0;
+
+  transform: translateY(var(--deal-y)) scale(var(--deal-s));
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+  transition-delay: calc(var(--card-i, 0) * 60ms);
+}
+
+.oh-hand.is-dealt .oh-card {
+  --deal-y: 0px;
+  --deal-s: 1;
+  opacity: 1;
+}
+
+/* Clearing runs faster than dealing — asymmetric on purpose. */
+.oh-hand.is-clearing .oh-card {
+  --deal-y: 16px;
+  opacity: 0;
+  transition-duration: var(--dur-fast);
+  transition-delay: calc(var(--card-i, 0) * 40ms);
+}
+
+.oh-card__inner {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--dur-med) var(--ease-in-out);
+}
+
+.oh-card[aria-expanded="true"] .oh-card__inner { transform: rotateY(180deg); }
+
+.oh-card__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-4);
+  background-color: var(--paper-raised);
+  border: var(--hairline) solid var(--rule);
+  backface-visibility: hidden;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.oh-card__face--back { transform: rotateY(180deg); }
+
+.oh-card:hover .oh-card__face,
+.oh-card:focus-visible .oh-card__face { border-color: var(--rule-strong); }
+
+.oh-card__meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.oh-card__title {
+  margin-top: auto;
+  font-size: 1.125rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-variation-settings: "wght" 560, "wdth" 94;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.oh-card__rule {
+  inline-size: 40%;
+  block-size: var(--hairline);
+  margin-block: var(--sp-3);
+  background-color: var(--rule-strong);
+}
+
+.oh-card__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.oh-card__action { color: var(--ink-3); transition: color var(--dur-fast) var(--ease-out); }
+.oh-card:hover .oh-card__action { color: var(--accent); }
+
+/* Back face */
+.oh-card__desc {
+  margin-top: var(--sp-3);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.oh-card__note {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* --- Category signals ---------------------------------------------------
+   Four categories, four different mechanisms — not four colours. */
+
+.oh-card--webops .oh-card__rule { background-color: var(--accent); }
+.oh-card--experience .oh-card__meta { color: var(--ink); }
+.oh-card--personal .oh-card__face { background-color: var(--paper-sunk); }
+
+/* --------------------------------------------------------------------------
+   THE BUG
+   --------------------------------------------------------------------------
+   Not styled to look special — styled to look slightly *wrong*. A divider
+   that does not line up, a number that was never assigned, and one gap in
+   the border. No glow, no shimmer.
+   -------------------------------------------------------------------------- */
+
+.oh-card--bug .oh-card__rule {
+  margin-left: 6px;      /* misaligned with the rest of the card */
+  inline-size: 34%;
+  background-color: var(--ink-3);
+}
+
+.oh-card--bug .oh-card__face--front::after {
+  /* One interruption in the right-hand border. */
+  content: "";
+  position: absolute;
+  top: 38%;
+  right: -1px;
+  inline-size: var(--hairline);
+  block-size: 16px;
+  background-color: var(--paper-raised);
+}
+
+.oh-card--bug .oh-card__action { color: var(--accent); }
+
+/* The single, one-time anomaly after the deal settles. */
+.oh-card--bug.is-glitching .oh-card__title { transform: translateX(3px); }
+
+.oh-card--bug.is-resolved .oh-card__rule {
+  margin-left: 0;
+  inline-size: 40%;
+  background-color: var(--accent);
+}
+
+.oh-card--bug.is-resolved .oh-card__face--front::after { display: none; }
+
+/* --------------------------------------------------------------------------
+   Investigation Mode
+   -------------------------------------------------------------------------- */
+
+.oh__hand-view[hidden],
+.oh__incident[hidden] { display: none; }
+
+.oh__incident { padding-top: var(--sp-2); }
+
+.incident__id {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: var(--hairline) solid var(--ink);
+  margin-bottom: var(--sp-5);
+}
+
+.incident__title {
+  font-size: var(--fs-2);
+  line-height: 1.05;
+  font-variation-settings: "wght" 560, "wdth" 94;
+  margin-bottom: var(--sp-5);
+}
+
+.incident__title:focus-visible { outline-offset: 6px; }
+
+.incident__block { margin-bottom: var(--sp-5); }
+
+.incident__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: var(--sp-2);
+}
+
+.incident__text { color: var(--ink-2); max-width: var(--measure); }
+.incident__quote { color: var(--ink); font-style: normal; }
+
+.incident__status--open     { color: var(--ink-3); }
+.incident__status--active   { color: var(--ink); }
+.incident__status--resolved { color: var(--accent); }
+
+/* --- Investigation paths ------------------------------------------------- */
+
+.incident__paths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+
+.incident__path {
+  flex: 1 1 12rem;
+  padding: var(--sp-3) var(--sp-4);
+  background: none;
+  border: var(--hairline) solid var(--rule-strong);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--ink);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.incident__path:hover { border-color: var(--ink); }
+
+/* Inspected paths stay marked — the state is the record of what you did. */
+.incident__path[aria-pressed="true"] {
+  border-color: var(--rule);
+  color: var(--ink-3);
+}
+
+.incident__path[aria-pressed="true"]::after {
+  content: " ✓";
+  color: var(--accent);
+}
+
+/* --- Evidence ------------------------------------------------------------ */
+
+.evidence[hidden] { display: none; }
+
+.evidence {
+  padding-block: var(--sp-4);
+  border-top: var(--hairline) solid var(--rule);
+}
+
+.evidence__head {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: var(--sp-3);
+}
+
+.evidence__row {
+  display: grid;
+  gap: var(--sp-1) var(--sp-5);
+  padding-block: var(--sp-2);
+}
+
+.evidence__row dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.evidence__row dd { margin: 0; color: var(--ink-2); }
+
+/* --- Hypothesis ---------------------------------------------------------- */
+
+.incident__hypothesis[hidden] { display: none; }
+
+.incident__hypothesis {
+  padding-top: var(--sp-5);
+  margin-top: var(--sp-5);
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.hypothesis__list { display: grid; gap: var(--sp-3); margin-top: var(--sp-4); }
+
+.hypothesis__option {
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  gap: var(--sp-3);
+  align-items: baseline;
+  padding: var(--sp-3) var(--sp-4);
+  background: none;
+  border: var(--hairline) solid var(--rule);
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink-2);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.hypothesis__option:hover { border-color: var(--rule-strong); color: var(--ink); }
+
+.hypothesis__key {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  color: var(--ink-3);
+}
+
+.hypothesis__option.is-wrong { border-color: var(--rule); color: var(--ink-3); }
+.hypothesis__option.is-wrong .hypothesis__key::after { content: " ×"; }
+
+.hypothesis__option.is-right {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.hypothesis__feedback[hidden] { display: none; }
+
+.hypothesis__feedback {
+  margin-top: var(--sp-4);
+  padding-left: var(--sp-4);
+  border-left: 2px solid var(--rule-strong);
+  color: var(--ink-2);
+}
+
+.hypothesis__feedback.is-resolved { border-left-color: var(--accent); }
+
+/* --- Resolution ---------------------------------------------------------- */
+
+.incident__resolution[hidden] { display: none; }
+
+.incident__resolution {
+  padding-top: var(--sp-5);
+  margin-top: var(--sp-5);
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.incident__nice {
+  font-size: var(--fs-2);
+  font-variation-settings: "wght" 560, "wdth" 94;
+  margin-bottom: var(--sp-2);
+}
+
+.incident__annotation {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  margin-bottom: var(--sp-5);
+}
+
+.incident__return {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  background-color: var(--ink);
+  color: var(--paper);
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.incident__return:hover { background-color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   Desktop — the fan
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 64em) {
+  .oh-hand {
+    --hand-card-w: 156px;
+    --hand-card-h: 220px;
+    --hand-step: 124px;
+    --hand-rot: 2deg;
+    --hand-lift: 4px;
+    --hand-mid: 3;
+
+    display: block;
+    position: relative;
+    overflow: visible;
+    margin-inline: auto;
+    padding-inline: 0;
+    inline-size: calc(var(--hand-card-w) + (var(--hand-n) - 1) * var(--hand-step));
+    block-size: calc(var(--hand-card-h) + 3 * var(--hand-lift) + 28px);
+  }
+
+  .oh-hand__slot {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+  }
+
+  /* One transform, composed from independent custom properties, so each
+     interaction state only has to change its own variable. */
+  .oh-card {
+    position: relative;
+    transform-origin: 50% 92%;
+    transform:
+      translateX(calc(var(--card-i) * var(--hand-step) + var(--nudge, 0px)))
+      translateY(calc(
+        var(--card-lift) * var(--hand-lift) + var(--deal-y) + var(--hover-y, 0px)
+      ))
+      rotate(calc((var(--card-i) - var(--hand-mid)) * var(--hand-rot) * var(--rot-mult, 1)))
+      scale(var(--deal-s));
+  }
+
+  .oh-card:hover,
+  .oh-card:focus-visible,
+  .oh-card[aria-expanded="true"] {
+    --hover-y: -18px;
+    --rot-mult: 0;
+    z-index: 5;
+  }
+
+  /* Neighbours of the active card step aside. */
+  .oh-hand__slot:hover + .oh-hand__slot .oh-card { --nudge: 10px; }
+  .oh-hand__slot:has(+ .oh-hand__slot:hover) .oh-card { --nudge: -10px; }
+
+  /* The rest of the hand recedes while one card is active. */
+  .oh-hand:has(.oh-card:hover) .oh-card:not(:hover) { opacity: 0.72; }
+
+  /* Investigation Mode gets the sticky-aside composition used elsewhere. */
+  .oh__incident {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+
+  .incident__aside {
+    grid-column: 1 / span 4;
+    position: sticky;
+    top: 7rem;
+    align-self: start;
+  }
+
+  .incident__main { grid-column: 6 / -1; }
+
+  .incident__id { display: block; }
+  .incident__id > * + * { margin-top: var(--sp-2); }
+
+  .evidence__row { grid-template-columns: 8rem 1fr; }
+}
+
+@media (min-width: 75em) {
+  .oh-hand {
+    --hand-card-w: 168px;
+    --hand-card-h: 236px;
+    --hand-step: 140px;
+  }
+
+  .oh-card__title { font-size: 1.25rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion — the fan is decorative, so it is replaced entirely by a
+   flat grid rather than merely being un-animated. THE BUG's static
+   irregularities survive, so it stays discoverable.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .oh-hand {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--sp-4);
+    inline-size: auto;
+    block-size: auto;
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  .oh-hand__slot { position: static; }
+
+  .oh-card {
+    inline-size: 100%;
+    opacity: 1;
+    transform: none !important;
+  }
+
+  .oh-card__inner { transition: none; }
+  .oh-card[aria-expanded="true"] .oh-card__inner { transform: rotateY(180deg); }
+}

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Placeholder: WooCommerce to third-party system integration diagram">
+  <rect width="1200" height="750" fill="#f4f1ea"/>
+  <text x="32" y="52" font-family="monospace" font-size="16" fill="#6e6a5b" letter-spacing="2">INTEGRATION — ORDER FLOW</text>
+  <line x1="32" y1="72" x2="1168" y2="72" stroke="#16150f" stroke-width="1.5"/>
+
+  <!-- node 1 -->
+  <rect x="60" y="180" width="250" height="150" fill="none" stroke="#16150f" stroke-width="1.5"/>
+  <text x="84" y="222" font-family="monospace" font-size="16" fill="#b03a1e" letter-spacing="1.5">SOURCE</text>
+  <rect x="84" y="244" width="180" height="16" fill="#16150f"/>
+  <rect x="84" y="272" width="130" height="10" fill="#d8d3c6"/>
+  <rect x="84" y="292" width="160" height="10" fill="#d8d3c6"/>
+
+  <!-- arrow -->
+  <line x1="330" y1="255" x2="450" y2="255" stroke="#b03a1e" stroke-width="1.5"/>
+  <path d="M450 255 L438 249 L438 261 Z" fill="#b03a1e"/>
+  <text x="342" y="240" font-family="monospace" font-size="14" fill="#6e6a5b">WEBHOOK</text>
+
+  <!-- node 2 -->
+  <rect x="470" y="150" width="260" height="210" fill="#ece8de" stroke="#16150f" stroke-width="1.5"/>
+  <text x="494" y="192" font-family="monospace" font-size="16" fill="#b03a1e" letter-spacing="1.5">MAPPING LAYER</text>
+  <g stroke="#b9b3a3">
+    <line x1="494" y1="216" x2="706" y2="216"/>
+    <line x1="494" y1="252" x2="706" y2="252"/>
+    <line x1="494" y1="288" x2="706" y2="288"/>
+    <line x1="494" y1="324" x2="706" y2="324"/>
+  </g>
+  <g fill="#6e6a5b">
+    <rect x="494" y="228" width="90" height="9"/><rect x="616" y="228" width="90" height="9"/>
+    <rect x="494" y="264" width="70" height="9"/><rect x="616" y="264" width="80" height="9"/>
+    <rect x="494" y="300" width="100" height="9"/><rect x="616" y="300" width="60" height="9"/>
+  </g>
+
+  <!-- arrow -->
+  <line x1="750" y1="255" x2="870" y2="255" stroke="#b03a1e" stroke-width="1.5"/>
+  <path d="M870 255 L858 249 L858 261 Z" fill="#b03a1e"/>
+  <text x="758" y="240" font-family="monospace" font-size="14" fill="#6e6a5b">REST API</text>
+
+  <!-- node 3 -->
+  <rect x="890" y="180" width="250" height="150" fill="none" stroke="#16150f" stroke-width="1.5"/>
+  <text x="914" y="222" font-family="monospace" font-size="16" fill="#b03a1e" letter-spacing="1.5">DESTINATION</text>
+  <rect x="914" y="244" width="180" height="16" fill="#16150f"/>
+  <rect x="914" y="272" width="150" height="10" fill="#d8d3c6"/>
+  <rect x="914" y="292" width="110" height="10" fill="#d8d3c6"/>
+
+  <!-- return path -->
+  <path d="M1015 340 L1015 430 L185 430 L185 340" fill="none" stroke="#b9b3a3" stroke-width="1.5" stroke-dasharray="6 6"/>
+  <path d="M185 340 L179 352 L191 352 Z" fill="#b9b3a3"/>
+  <text x="520" y="418" font-family="monospace" font-size="14" fill="#6e6a5b">SCHEDULED RECONCILIATION</text>
+
+  <!-- log strip -->
+  <line x1="32" y1="500" x2="1168" y2="500" stroke="#d8d3c6"/>
+  <g font-family="monospace" font-size="15" fill="#6e6a5b">
+    <text x="32" y="534">[ OK ]   order.created        mapped        202</text>
+    <text x="32" y="566">[ OK ]   order.created        mapped        202</text>
+    <text x="32" y="598" fill="#b03a1e">[ RETRY ] order.created       timeout       504</text>
+    <text x="32" y="630">[ OK ]   inventory.sync       12 items      200</text>
+  </g>
+
+  <rect x="0" y="700" width="1200" height="50" fill="#16150f"/>
+  <text x="32" y="732" font-family="monospace" font-size="18" fill="#f4f1ea" letter-spacing="2">03 / PLACEHOLDER — REPLACE WITH ARCHITECTURE DIAGRAM</text>
+</svg>

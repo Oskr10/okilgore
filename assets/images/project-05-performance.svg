@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Placeholder: network waterfall showing a deferred script blocking a checkout handler">
+  <rect width="1200" height="750" fill="#f4f1ea"/>
+  <text x="32" y="52" font-family="monospace" font-size="16" fill="#6e6a5b" letter-spacing="2">NETWORK — REQUEST WATERFALL</text>
+  <line x1="32" y1="72" x2="1168" y2="72" stroke="#16150f" stroke-width="1.5"/>
+
+  <!-- time axis -->
+  <g font-family="monospace" font-size="13" fill="#b9b3a3">
+    <text x="420" y="106">0.5s</text><text x="600" y="106">1.0s</text>
+    <text x="780" y="106">1.5s</text><text x="960" y="106">2.0s</text>
+  </g>
+  <g stroke="#e2ddd1">
+    <line x1="420" y1="118" x2="420" y2="590"/>
+    <line x1="600" y1="118" x2="600" y2="590"/>
+    <line x1="780" y1="118" x2="780" y2="590"/>
+    <line x1="960" y1="118" x2="960" y2="590"/>
+  </g>
+
+  <!-- rows -->
+  <g font-family="monospace" font-size="15" fill="#4a473d">
+    <text x="32" y="152">document</text>
+    <text x="32" y="196">main.css</text>
+    <text x="32" y="240">theme.js</text>
+    <text x="32" y="284">vendor.min.js</text>
+    <text x="32" y="328" fill="#b03a1e">gateway.js</text>
+    <text x="32" y="372" fill="#b03a1e">checkout-handler.js</text>
+    <text x="32" y="416">analytics.js</text>
+    <text x="32" y="460">fonts.woff2</text>
+  </g>
+
+  <g>
+    <rect x="260" y="138" width="120" height="16" fill="#6e6a5b"/>
+    <rect x="380" y="182" width="90"  height="16" fill="#6e6a5b"/>
+    <rect x="400" y="226" width="150" height="16" fill="#6e6a5b"/>
+    <rect x="470" y="270" width="210" height="16" fill="#6e6a5b"/>
+    <rect x="860" y="314" width="180" height="16" fill="#b03a1e"/>
+    <rect x="900" y="358" width="150" height="16" fill="#b03a1e"/>
+    <rect x="520" y="402" width="130" height="16" fill="#6e6a5b"/>
+    <rect x="330" y="446" width="110" height="16" fill="#6e6a5b"/>
+  </g>
+
+  <!-- delay marker -->
+  <line x1="560" y1="300" x2="560" y2="392" stroke="#b03a1e" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="860" y1="300" x2="860" y2="392" stroke="#b03a1e" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="580" y="296" font-family="monospace" font-size="14" fill="#b03a1e">DEFERRED UNTIL FIRST INTERACTION</text>
+
+  <!-- console error -->
+  <rect x="32" y="530" width="1136" height="130" fill="#ece8de"/>
+  <rect x="32" y="530" width="3" height="130" fill="#b03a1e"/>
+  <g font-family="monospace" font-size="16">
+    <text x="60" y="570" fill="#b03a1e">Uncaught TypeError: window.[gateway] is undefined</text>
+    <text x="60" y="602" fill="#6e6a5b">    at initCheckout (checkout-handler.js:41)</text>
+    <text x="60" y="632" fill="#6e6a5b">    at HTMLFormElement.&#60;anonymous&#62;</text>
+  </g>
+
+  <rect x="0" y="700" width="1200" height="50" fill="#16150f"/>
+  <text x="32" y="732" font-family="monospace" font-size="18" fill="#f4f1ea" letter-spacing="2">05 / PLACEHOLDER — REPLACE WITH BEFORE/AFTER CAPTURE</text>
+</svg>

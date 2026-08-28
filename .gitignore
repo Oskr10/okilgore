@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors / local tooling
+.vscode/
+.idea/
+.claude/
+*.swp
+
+# Logs
+*.log
+
+# Local server / tooling artefacts (none are required to build this site)
+node_modules/
+.cache/
+dist/
+
+# Earlier draft, kept locally for reference. Remove this line if you want it
+# in the public repository.
+_archive/

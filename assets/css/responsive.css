@@ -1,0 +1,209 @@
+/* ==========================================================================
+   responsive.css — breakpoint composition
+   Oscar Kilgore — portfolio
+   --------------------------------------------------------------------------
+   Everything before this file is the mobile design. These breakpoints do not
+   simply widen it — each one re-composes the layout:
+
+     40em  phone landscape / small tablet — metadata goes horizontal
+     56em  tablet — nav replaces the drawer, index rows split
+     64em  laptop — asymmetric grid composition begins
+     90em  large desktop — columns spread, numerals move off the rail
+
+   Breakpoints are in em so they respond to the user's font size, not just
+   the viewport.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   40em / 640px
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 40em) {
+  .hero__meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-5);
+  }
+
+  .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gutter); }
+
+  .problem__item { grid-template-columns: 3rem 1fr; }
+
+  .colophon__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-6);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   56em / 896px — the nav appears, the index becomes a two-track row
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 56em) {
+  .nav { display: block; }
+  .nav-toggle,
+  .drawer { display: none; }
+
+  /* Index row: number, title block, metadata block, action.
+     Title and summary share a track so the summary hangs under the title
+     rather than being pushed into its own full-width line. */
+  .index__link {
+    grid-template-columns: 3.5rem minmax(0, 1.2fr) minmax(0, 0.8fr) 8rem;
+    grid-template-areas:
+      "num title   cat   cta"
+      "num summary stack cta";
+    align-items: start;
+    column-gap: var(--gutter);
+    row-gap: var(--sp-3);
+    padding-block: var(--sp-6);
+  }
+
+  .index__num     { grid-area: num; padding-top: 0.45em; }
+  .index__title   { grid-area: title; }
+  .index__summary { grid-area: summary; }
+  .index__cat     { grid-area: cat; padding-top: 0.5em; }
+  .index__stack   { grid-area: stack; }
+  .index__cta     { grid-area: cta; justify-self: end; padding-top: 0.55em; }
+
+  /* Only reachable without JavaScript — the thumbnail is otherwise the
+     cursor preview. Kept on its own row so it cannot disturb the grid. */
+  .index__thumb   { grid-column: 1 / -1; }
+
+  .caps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* --------------------------------------------------------------------------
+   64em / 1024px — asymmetric composition
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 64em) {
+
+  /* The grid switches on here. Below this width these blocks are ordinary
+     flow content — the layout is re-composed at this breakpoint rather
+     than being a 12-column grid that has collapsed to one column. */
+  .hero__inner,
+  .problem__inner,
+  .about__inner,
+  .contact__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+
+  /* --- Hero ------------------------------------------------------------
+     The headline runs wide across nine columns; the metadata sits on a
+     different rail at columns 9–12 so the block is deliberately off-axis
+     rather than a centred stack.                                        */
+  .hero__inner { align-items: start; row-gap: var(--sp-5); }
+
+  .hero__label    { grid-column: 1 / -1; margin-bottom: var(--sp-4); }
+  .hero__headline { grid-column: 1 / span 9; max-width: none; }
+  .hero__body     { grid-column: 1 / span 6; margin-bottom: 0; }
+  .hero__meta     { grid-column: 9 / -1; grid-template-columns: 1fr; gap: var(--sp-3); padding-top: var(--sp-4); margin-bottom: 0; }
+  .hero__actions  { grid-column: 1 / span 6; margin-top: var(--sp-4); }
+
+  /* --- Problem: sticky headline against a scrolling list --------------- */
+  .problem__inner { row-gap: var(--sp-6); }
+
+  .problem__aside {
+    grid-column: 1 / span 5;
+    position: sticky;
+    top: 8rem;
+    align-self: start;
+  }
+
+  .problem__content { grid-column: 7 / -1; }
+  .problem__list { margin-top: 0; }
+
+  /* --- About: prose inset, numeral hanging in the left margin ---------- */
+  .about__inner { row-gap: var(--sp-6); }
+  .about__numeral { grid-column: 1 / span 2; }
+  .about__body    { grid-column: 4 / span 8; }
+
+  /* --- Capabilities ---------------------------------------------------- */
+  .caps__inner { grid-column: 1 / -1; }
+
+  /* --- Contact --------------------------------------------------------- */
+  .contact__headline-wrap { grid-column: 1 / span 8; }
+  .contact__body          { grid-column: 1 / span 6; }
+  .contact__channels      { grid-column: 1 / span 9; }
+  .contact__aside         { grid-column: 11 / -1; align-self: end; text-align: right; }
+
+  /* --- Footer ---------------------------------------------------------- */
+  .colophon__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  /* Section heads gain a right-aligned counter once there is room. */
+  .section__head { flex-wrap: nowrap; }
+  .section__note { flex: 1 1 auto; text-align: right; max-width: 46ch; margin-left: auto; }
+}
+
+/* --------------------------------------------------------------------------
+   90em / 1440px — more air, wider tracks
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 90em) {
+  .index__link {
+    grid-template-columns: 5rem minmax(0, 1.25fr) minmax(0, 0.75fr) 10rem;
+  }
+
+  .hero__headline { grid-column: 1 / span 8; }
+  .about__body    { grid-column: 4 / span 7; }
+}
+
+/* --------------------------------------------------------------------------
+   Pointer / input capability
+   --------------------------------------------------------------------------
+   Capability queries, not width queries. A touchscreen laptop gets the
+   touch treatment for hover-dependent affordances regardless of size.
+   -------------------------------------------------------------------------- */
+
+/* No hover available: the row already shows its thumbnail inline, so the
+   call to action needs to read as a link rather than a hover reveal. */
+@media (hover: none) {
+  .index__cta { color: var(--accent); }
+  .preview,
+  .cursor { display: none; }
+}
+
+/* Coarse pointers get larger hit areas on the compact rows. */
+@media (pointer: coarse) {
+  .nav__link,
+  .contact__channel,
+  .drawer__link { min-block-size: 2.75rem; }
+
+  .theme__trigger {
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+  }
+}
+
+/* The theme panel is anchored to its trigger, which sits close enough to the
+   right edge that a trigger-anchored popover runs off-screen on a phone.
+   Below the tablet breakpoint it is pinned to the page gutters instead. */
+@media (max-width: 34em) {
+  .theme__panel {
+    position: fixed;
+    top: 4.75rem;
+    right: var(--page-x);
+    left: var(--page-x);
+    max-inline-size: none;
+    inline-size: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Print — the resume is a PDF, but a printed page should still be legible.
+   -------------------------------------------------------------------------- */
+
+@media print {
+  .masthead,
+  .preview,
+  .cursor,
+  .grid-overlay,
+  .hero__actions,
+  .build-note { display: none !important; }
+
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .index__link { break-inside: avoid; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; }
+}

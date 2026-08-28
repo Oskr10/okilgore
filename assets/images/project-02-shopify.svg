@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Placeholder: Shopify product template with metafield-driven specification blocks">
+  <rect width="1200" height="750" fill="#f4f1ea"/>
+  <rect x="0" y="0" width="1200" height="46" fill="#ece8de"/>
+  <line x1="0" y1="46" x2="1200" y2="46" stroke="#d8d3c6"/>
+  <g font-family="monospace" font-size="16" fill="#6e6a5b" letter-spacing="1.5">
+    <text x="32" y="30">PRODUCT.TECHNICAL.JSON</text>
+  </g>
+  <!-- gallery -->
+  <rect x="32" y="86" width="500" height="380" fill="#ece8de"/>
+  <path d="M132 366 L232 246 L312 336 L372 286 L432 366 Z" fill="#d8d3c6"/>
+  <circle cx="152" cy="176" r="26" fill="#d8d3c6"/>
+  <g>
+    <rect x="32" y="482" width="116" height="86" fill="#ece8de"/>
+    <rect x="160" y="482" width="116" height="86" fill="#ece8de"/>
+    <rect x="288" y="482" width="116" height="86" fill="#ece8de"/>
+    <rect x="416" y="482" width="116" height="86" fill="#ece8de"/>
+  </g>
+  <!-- product info -->
+  <rect x="576" y="86" width="150" height="14" fill="#b03a1e"/>
+  <rect x="576" y="124" width="470" height="30" fill="#16150f"/>
+  <rect x="576" y="166" width="330" height="30" fill="#16150f"/>
+  <rect x="576" y="226" width="120" height="22" fill="#4a473d"/>
+  <g fill="#d8d3c6">
+    <rect x="576" y="280" width="470" height="10"/>
+    <rect x="576" y="304" width="440" height="10"/>
+    <rect x="576" y="328" width="380" height="10"/>
+  </g>
+  <rect x="576" y="368" width="230" height="52" fill="#16150f"/>
+  <!-- spec table driven by metaobjects -->
+  <line x1="576" y1="470" x2="1168" y2="470" stroke="#16150f" stroke-width="1.5"/>
+  <text x="576" y="500" font-family="monospace" font-size="15" fill="#b03a1e" letter-spacing="2">SPEC_ROWS — METAOBJECT LIST</text>
+  <g stroke="#d8d3c6">
+    <line x1="576" y1="520" x2="1168" y2="520"/>
+    <line x1="576" y1="562" x2="1168" y2="562"/>
+    <line x1="576" y1="604" x2="1168" y2="604"/>
+    <line x1="576" y1="646" x2="1168" y2="646"/>
+  </g>
+  <g fill="#6e6a5b">
+    <rect x="576" y="534" width="140" height="10"/><rect x="900" y="534" width="180" height="10"/>
+    <rect x="576" y="576" width="170" height="10"/><rect x="900" y="576" width="120" height="10"/>
+    <rect x="576" y="618" width="120" height="10"/><rect x="900" y="618" width="210" height="10"/>
+  </g>
+  <rect x="0" y="700" width="1200" height="50" fill="#16150f"/>
+  <text x="32" y="732" font-family="monospace" font-size="18" fill="#f4f1ea" letter-spacing="2">02 / PLACEHOLDER — REPLACE WITH PRODUCT TEMPLATE CAPTURE</text>
+</svg>

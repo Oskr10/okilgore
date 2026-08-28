@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Placeholder: consent state matrix showing which tags fire before and after consent">
+  <rect width="1200" height="750" fill="#f4f1ea"/>
+  <text x="32" y="52" font-family="monospace" font-size="16" fill="#6e6a5b" letter-spacing="2">CONSENT STATE — TAG GATING</text>
+  <line x1="32" y1="72" x2="1168" y2="72" stroke="#16150f" stroke-width="1.5"/>
+
+  <!-- column headers -->
+  <g font-family="monospace" font-size="15" letter-spacing="1.5">
+    <text x="32" y="132" fill="#16150f">CONSENT TYPE</text>
+    <text x="560" y="132" fill="#6e6a5b">DEFAULT</text>
+    <text x="760" y="132" fill="#6e6a5b">GRANTED</text>
+    <text x="960" y="132" fill="#6e6a5b">TAG</text>
+  </g>
+  <line x1="32" y1="150" x2="1168" y2="150" stroke="#b9b3a3"/>
+
+  <g font-family="monospace" font-size="17">
+    <text x="32" y="196" fill="#16150f">analytics_storage</text>
+    <text x="560" y="196" fill="#b03a1e">denied</text>
+    <text x="760" y="196" fill="#16150f">granted</text>
+    <text x="960" y="196" fill="#6e6a5b">GA4</text>
+
+    <text x="32" y="252" fill="#16150f">ad_storage</text>
+    <text x="560" y="252" fill="#b03a1e">denied</text>
+    <text x="760" y="252" fill="#16150f">granted</text>
+    <text x="960" y="252" fill="#6e6a5b">ADS</text>
+
+    <text x="32" y="308" fill="#16150f">ad_user_data</text>
+    <text x="560" y="308" fill="#b03a1e">denied</text>
+    <text x="760" y="308" fill="#16150f">granted</text>
+    <text x="960" y="308" fill="#6e6a5b">ADS</text>
+
+    <text x="32" y="364" fill="#16150f">ad_personalization</text>
+    <text x="560" y="364" fill="#b03a1e">denied</text>
+    <text x="760" y="364" fill="#16150f">granted</text>
+    <text x="960" y="364" fill="#6e6a5b">ADS</text>
+
+    <text x="32" y="420" fill="#16150f">functionality_storage</text>
+    <text x="560" y="420" fill="#16150f">granted</text>
+    <text x="760" y="420" fill="#16150f">granted</text>
+    <text x="960" y="420" fill="#6e6a5b">CORE</text>
+  </g>
+  <g stroke="#d8d3c6">
+    <line x1="32" y1="216" x2="1168" y2="216"/>
+    <line x1="32" y1="272" x2="1168" y2="272"/>
+    <line x1="32" y1="328" x2="1168" y2="328"/>
+    <line x1="32" y1="384" x2="1168" y2="384"/>
+    <line x1="32" y1="440" x2="1168" y2="440"/>
+  </g>
+
+  <!-- consent banner mock -->
+  <rect x="32" y="500" width="720" height="150" fill="#ece8de" stroke="#16150f" stroke-width="1.5"/>
+  <rect x="64" y="534" width="420" height="12" fill="#4a473d"/>
+  <rect x="64" y="558" width="560" height="10" fill="#d8d3c6"/>
+  <rect x="64" y="580" width="480" height="10" fill="#d8d3c6"/>
+  <rect x="64" y="608" width="130" height="30" fill="#16150f"/>
+  <rect x="210" y="608" width="130" height="30" fill="none" stroke="#b9b3a3"/>
+  <rect x="356" y="608" width="130" height="30" fill="none" stroke="#b9b3a3"/>
+
+  <!-- data layer -->
+  <text x="800" y="524" font-family="monospace" font-size="14" fill="#b03a1e" letter-spacing="1.5">DATALAYER</text>
+  <g font-family="monospace" font-size="14" fill="#6e6a5b">
+    <text x="800" y="556">['consent','default',{…}]</text>
+    <text x="800" y="584">['consent','update',{…}]</text>
+    <text x="800" y="612">url_passthrough: true</text>
+    <text x="800" y="640">ads_data_redaction: true</text>
+  </g>
+
+  <rect x="0" y="700" width="1200" height="50" fill="#16150f"/>
+  <text x="32" y="732" font-family="monospace" font-size="18" fill="#f4f1ea" letter-spacing="2">04 / PLACEHOLDER — REPLACE WITH TAG ASSISTANT CAPTURE</text>
+</svg>

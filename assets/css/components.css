@@ -1,0 +1,988 @@
+/* ==========================================================================
+   components.css — masthead, hero, work index, capabilities, contact, footer
+   Oscar Kilgore — portfolio
+   --------------------------------------------------------------------------
+   Mobile-first. Desktop composition is layered on in responsive.css.
+   Naming: block__element--modifier, state classes prefixed `is-`.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Masthead
+   -------------------------------------------------------------------------- */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--paper);
+  border-bottom: var(--hairline) solid transparent;
+  transition: border-color var(--dur-med) var(--ease-out);
+}
+
+/* The rule only appears once the page has moved — the header is otherwise
+   indistinguishable from the page, which is the point. */
+.masthead.is-scrolled { border-bottom-color: var(--rule); }
+
+.masthead__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  min-height: 4.5rem;
+  padding-inline: var(--page-x);
+  margin-inline: auto;
+  max-width: 96rem;
+}
+
+/* Nav, theme wheel and menu button travel together on the right, so the
+   masthead stays a two-part composition at every width. */
+.masthead__end {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.6vw, 1.75rem);
+}
+
+/* --- Wordmark ----------------------------------------------------------
+   Reads "Oscar Kilgore" at rest. Once scrolled it contracts to "OK" by
+   collapsing the two trailing letter groups; hovering or focusing expands
+   it again. The transition is a discrete state change, not a per-frame
+   animation, so animating max-inline-size here is cheap and safe.        */
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: var(--fs-mono);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink);
+  padding-block: var(--sp-2);
+}
+
+.wordmark__rest {
+  display: inline-block;
+  max-inline-size: 8ch;
+  overflow: hidden;
+  transition:
+    max-inline-size var(--dur-med) var(--ease-in-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+
+.masthead.is-scrolled .wordmark__rest {
+  max-inline-size: 0;
+  opacity: 0;
+}
+
+.masthead.is-scrolled .wordmark:hover .wordmark__rest,
+.masthead.is-scrolled .wordmark:focus-visible .wordmark__rest {
+  max-inline-size: 8ch;
+  opacity: 1;
+}
+
+.wordmark__dot {
+  inline-size: 0.3rem;
+  block-size: 0.3rem;
+  margin-inline-start: 0.55ch;
+  border-radius: 50%;
+  background-color: var(--accent);
+  transform: scale(0);
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.masthead.is-scrolled .wordmark__dot { transform: scale(1); }
+
+/* --- Navigation --------------------------------------------------------
+   Rolling-text hover: two stacked copies of the label inside a clipped
+   box, moved with transform only.                                        */
+
+.nav { display: none; } /* shown from the tablet breakpoint up */
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 2.4vw, 2.5rem);
+}
+
+.nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.1em;
+  padding-block: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__roll {
+  display: block;
+  block-size: 1.4em;
+  overflow: hidden;
+}
+
+.nav__roll span {
+  display: block;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.nav__link:hover .nav__roll span,
+.nav__link:focus-visible .nav__roll span { transform: translateY(-100%); }
+
+.nav__link:hover,
+.nav__link:focus-visible { color: var(--ink); }
+
+/* Active-section indicator. Set by main.js via aria-current. */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: var(--sp-2);
+  block-size: var(--hairline);
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.nav__link[aria-current="true"] { color: var(--ink); }
+.nav__link[aria-current="true"]::after { transform: scaleX(1); }
+
+/* --- Mobile menu -------------------------------------------------------- */
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.nav-toggle__glyph {
+  inline-size: 1.125rem;
+  block-size: var(--hairline);
+  background-color: currentColor;
+  box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor;
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__glyph {
+  box-shadow: 0 0 0 currentColor, 0 0 0 currentColor;
+}
+
+.drawer {
+  position: fixed;
+  inset: 4.5rem 0 auto 0;
+  z-index: 99;
+  background-color: var(--paper);
+  border-block: var(--hairline) solid var(--rule);
+  padding: var(--sp-4) var(--page-x) var(--sp-6);
+  transform: translateY(-101%);
+  visibility: hidden;
+  transition:
+    transform var(--dur-med) var(--ease-in-out),
+    visibility 0s linear var(--dur-med);
+}
+
+.drawer.is-open {
+  transform: translateY(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.drawer__link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-block: var(--sp-4);
+  border-bottom: var(--hairline) solid var(--rule);
+  font-size: var(--fs-3);
+  font-variation-settings: "wght" 500;
+}
+
+.drawer__link:last-child { border-bottom: 0; }
+.drawer__link:active { color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   Theme wheel
+   --------------------------------------------------------------------------
+   A swatch button in the masthead that opens a wheel of palettes. The chips
+   are drawn with conic-gradients from three per-option custom properties,
+   so each one is a literal preview of the palette it applies — no images,
+   no hardcoded colours in the markup beyond the palette values themselves.
+   -------------------------------------------------------------------------- */
+
+.theme {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.theme__trigger {
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+/* Quarter of accent, remainder paper, ringed in ink — the site's three
+   working colours in one 18px mark. */
+.theme__chip {
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  border-radius: 50%;
+  border: var(--hairline) solid var(--chip-ink, var(--ink));
+  background:
+    conic-gradient(
+      from 180deg,
+      var(--chip-accent, var(--accent)) 0 25%,
+      var(--chip-paper, var(--paper)) 25% 100%
+    );
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.theme__trigger:hover .theme__chip { transform: rotate(90deg) scale(1.08); }
+.theme__trigger[aria-expanded="true"] .theme__chip { transform: rotate(180deg); }
+
+/* --- Panel ------------------------------------------------------------- */
+
+.theme__panel {
+  position: absolute;
+  top: calc(100% + var(--sp-2));
+  right: 0;
+  z-index: 10;
+  inline-size: max-content;
+  max-inline-size: min(19rem, calc(100vw - 2 * var(--page-x)));
+  padding: var(--sp-4);
+  background-color: var(--paper-raised);
+  border: var(--hairline) solid var(--ink);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.14);
+}
+
+.theme__panel[hidden] { display: none; }
+
+.theme__caption {
+  display: block;
+  margin-bottom: var(--sp-3);
+  color: var(--ink-3);
+}
+
+.theme__wheel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-3);
+}
+
+.theme__option {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-1);
+  background: none;
+  border: var(--hairline) solid transparent;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.theme__option .theme__chip {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+}
+
+.theme__option:hover { color: var(--ink); }
+.theme__option:hover .theme__chip { transform: rotate(90deg); }
+
+.theme__option[aria-checked="true"] {
+  color: var(--ink);
+  border-color: var(--rule-strong);
+}
+
+.theme__option[aria-checked="true"] .theme__chip {
+  box-shadow: 0 0 0 2px var(--paper-raised), 0 0 0 3px var(--accent);
+}
+
+.theme__note {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-3);
+  border-top: var(--hairline) solid var(--rule);
+  color: var(--ink-3);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons & inline links
+   -------------------------------------------------------------------------- */
+
+.btn {
+  --btn-fg: var(--paper);
+  --btn-bg: var(--ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-6);
+  background-color: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out);
+  will-change: transform; /* magnetic.js writes transform here */
+}
+
+.btn:hover { --btn-bg: var(--accent); }
+.btn:active { transform: scale(0.985); }
+
+.btn--quiet {
+  --btn-fg: var(--ink);
+  --btn-bg: transparent;
+  border: var(--hairline) solid var(--rule-strong);
+}
+
+.btn--quiet:hover {
+  --btn-bg: transparent;
+  --btn-fg: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn__arrow {
+  display: inline-block;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.btn:hover .btn__arrow { transform: translateX(0.3em); }
+
+/* Underline that draws from the left on hover and retracts to the right —
+   directional, so it reads as a deliberate stroke rather than a fade. */
+.link {
+  position: relative;
+  color: var(--ink);
+  padding-bottom: 0.1em;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% var(--hairline);
+  transition:
+    background-size var(--dur-med) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--accent);
+  background-size: 100% var(--hairline);
+}
+
+/* --------------------------------------------------------------------------
+   Hero
+   --------------------------------------------------------------------------
+   Deliberately shorter than the viewport: the Selected Work rule and
+   heading sit just below the fold line on a laptop, so the page reads as
+   continuous rather than as a landing screen.
+   -------------------------------------------------------------------------- */
+
+/* Sized so that on a 900px-tall laptop the Selected Work heading and the
+   top of project 01 sit just below the fold — the page reads as continuous
+   rather than as a landing screen you have to scroll past. */
+.hero {
+  padding-block: clamp(2rem, 3.5vw, 3rem) clamp(1.75rem, 2.5vw, 2rem);
+}
+
+.hero__label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-6);
+}
+
+.hero__label-sep {
+  inline-size: clamp(1.5rem, 4vw, 3.5rem);
+  block-size: var(--hairline);
+  background-color: var(--rule-strong);
+}
+
+/* --- The headline ------------------------------------------------------
+   main.js splits this into per-character spans and drives `--w` (weight)
+   from pointer proximity. Each span's inline-size is frozen at the peak
+   weight on init, so varying the weight never reflows the paragraph.
+   Without JS this stays a plain, correctly-weighted heading.             */
+
+.hero__headline {
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.03em;
+  font-variation-settings: "wght" 560, "wdth" 96;
+  max-width: 18ch;
+  margin-bottom: var(--sp-6);
+}
+
+.hero__headline .vf-word { display: inline-block; }
+
+.hero__headline .vf-char {
+  display: inline-block;
+  text-align: center; /* glyph stays centred inside its frozen-width box */
+  font-variation-settings: "wght" var(--w, 560), "wdth" var(--wd, 96);
+  /* No transition: the value is already interpolated per frame in JS.
+     A CSS transition here would fight the rAF loop and lag the pointer. */
+}
+
+/* Em dash gets a touch of accent — a single small typographic signal. */
+.hero__headline .vf-char[data-char="—"] { color: var(--accent); }
+
+.hero__body { margin-bottom: var(--sp-7); }
+
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5) var(--sp-7);
+  padding-top: var(--sp-5);
+  border-top: var(--hairline) solid var(--rule);
+  margin-bottom: var(--sp-7);
+}
+
+.hero__meta dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: var(--sp-1);
+}
+
+.hero__meta dd {
+  font-size: var(--fs-body);
+  font-variation-settings: "wght" 500;
+}
+
+/* Live availability pip. Two-step animation so it reads as a heartbeat,
+   not a blink. Disabled wholesale by the reduced-motion block. */
+.pip {
+  display: inline-block;
+  inline-size: 0.45rem;
+  block-size: 0.45rem;
+  margin-inline-end: 0.5ch;
+  border-radius: 50%;
+  background-color: var(--accent);
+  animation: pip 2.8s var(--ease-in-out) infinite;
+}
+
+@keyframes pip {
+  0%, 82%, 100% { opacity: 1; transform: scale(1); }
+  88%           { opacity: 0.35; transform: scale(0.72); }
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+}
+
+/* --------------------------------------------------------------------------
+   Section headers
+   -------------------------------------------------------------------------- */
+
+.section__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-bottom: var(--sp-5);
+  margin-bottom: var(--sp-6);
+  border-bottom: var(--hairline) solid var(--ink);
+}
+
+.section__title {
+  font-size: var(--fs-mono);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.section__note {
+  color: var(--ink-3);
+  font-size: var(--fs-body);
+  max-width: 42ch;
+}
+
+/* An honest build note. Delete the element when Phase 2 ships. */
+.build-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  margin-bottom: var(--sp-6);
+  border-left: 2px solid var(--accent);
+  background-color: var(--accent-wash);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  color: var(--ink-2);
+  text-transform: uppercase;
+}
+
+.build-note[hidden] { display: none; }
+
+/* --------------------------------------------------------------------------
+   Selected work — editorial index
+   --------------------------------------------------------------------------
+   Rows, not cards. The only containers are hairlines. On desktop the row
+   becomes a four-column composition; see responsive.css.
+   -------------------------------------------------------------------------- */
+
+.index { border-top: var(--hairline) solid var(--rule); }
+
+.index__row { border-bottom: var(--hairline) solid var(--rule); }
+
+.index__link {
+  display: grid;
+  gap: var(--sp-2);
+  padding-block: var(--sp-5);
+  transition: opacity var(--dur-med) var(--ease-out);
+}
+
+/* Dim the rest of the index while one row is active — the section as a
+   whole responds, which is what makes it feel like an index and not a
+   list of buttons. Applied by projects.js on the <ol>. */
+.index.is-engaged .index__row:not(.is-active) .index__link { opacity: 0.38; }
+
+.index__num {
+  color: var(--ink-3);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.index__title {
+  font-size: var(--fs-index);
+  line-height: 1.08;
+  font-variation-settings: "wght" 520, "wdth" 98;
+  transition:
+    transform var(--dur-med) var(--ease-out),
+    font-variation-settings var(--dur-med) var(--ease-out);
+}
+
+.index__summary {
+  color: var(--ink-2);
+  max-width: 46ch;
+  font-size: var(--fs-body);
+}
+
+.index__cat { color: var(--accent); }
+
+.index__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.index__stack li + li::before {
+  content: "/";
+  margin-inline-end: var(--sp-3);
+  color: var(--rule-strong);
+}
+
+.index__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--ink-3);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.index__cta-arrow { transition: transform var(--dur-med) var(--ease-out); }
+
+/* Hover / focus state — pointer devices only. Keyboard focus gets the same
+   treatment via :focus-visible so the two paths never diverge. */
+@media (hover: hover) and (pointer: fine) {
+  .index__row.is-active .index__num { color: var(--accent); transform: translateX(0.25rem); }
+  .index__row.is-active .index__title {
+    transform: translateX(0.75rem);
+    font-variation-settings: "wght" 660, "wdth" 100;
+  }
+  .index__row.is-active .index__cta { color: var(--accent); }
+  .index__row.is-active .index__cta-arrow { transform: translateX(0.35rem); }
+}
+
+.index__link:focus-visible .index__num { color: var(--accent); }
+.index__link:focus-visible .index__cta { color: var(--accent); }
+
+/* Inline thumbnail. Visible on touch/no-JS; the cursor preview replaces it
+   on fine-pointer devices (the `js` class is set before first paint). */
+.index__thumb {
+  display: block;
+  max-inline-size: 32rem;
+  margin-top: var(--sp-3);
+  border: var(--hairline) solid var(--rule);
+  background-color: var(--paper-raised);
+}
+
+.js .index__thumb { display: none; }
+
+@media (hover: none) {
+  .js .index__thumb { display: block; }
+}
+
+/* --- Cursor-following preview -------------------------------------------
+   One fixed layer, moved with translate3d only. projects.js clamps it to
+   the viewport and flips it to the opposite side of the pointer so it can
+   never sit on top of the row you are reading.                          */
+
+/* The layer owns translation only (written every frame by JS, never
+   transitioned). The frame inside owns the scale-in, so the CSS transition
+   and the rAF loop never write to the same property. */
+.preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  inline-size: clamp(16rem, 22vw, 24rem);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-100vw, 0, 0);
+  transition: opacity var(--dur-med) var(--ease-out);
+  will-change: transform, opacity;
+}
+
+.preview.is-visible { opacity: 1; }
+
+.preview__frame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--paper-raised);
+  border: var(--hairline) solid var(--ink);
+  transform: scale(0.94);
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.preview.is-visible .preview__frame { transform: scale(1); }
+
+.preview__img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.preview__label {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: var(--sp-2) var(--sp-3);
+  background-color: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Problem-solving
+   --------------------------------------------------------------------------
+   Understated on purpose. The evidence is the list, not the styling.
+   -------------------------------------------------------------------------- */
+
+.problem__headline {
+  font-size: var(--fs-2);
+  line-height: 1.12;
+  font-variation-settings: "wght" 500, "wdth" 97;
+  max-width: 20ch;
+  margin-bottom: var(--sp-5);
+}
+
+.problem__list { margin-top: var(--sp-6); }
+
+.problem__item {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: var(--sp-3);
+  align-items: baseline;
+  padding-block: var(--sp-4);
+  border-top: var(--hairline) solid var(--rule);
+  color: var(--ink-2);
+}
+
+.problem__item:last-child { border-bottom: var(--hairline) solid var(--rule); }
+
+.problem__item::before {
+  content: attr(data-n);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   Capabilities
+   --------------------------------------------------------------------------
+   Six groups set as columns separated by hairlines. No cards, no icons.
+   -------------------------------------------------------------------------- */
+
+.caps {
+  display: grid;
+  gap: var(--sp-6);
+  margin-top: var(--sp-6);
+}
+
+.caps__group { border-top: var(--hairline) solid var(--ink); padding-top: var(--sp-4); }
+
+.caps__name {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--sp-4);
+}
+
+.caps__list { display: grid; gap: var(--sp-2); }
+
+.caps__list li {
+  font-size: var(--fs-body);
+  line-height: 1.35;
+  color: var(--ink-2);
+  font-variation-settings: "wght" 420;
+}
+
+/* --------------------------------------------------------------------------
+   About
+   -------------------------------------------------------------------------- */
+
+.about__heading {
+  font-size: var(--fs-1);
+  line-height: 1.06;
+  font-variation-settings: "wght" 560, "wdth" 94;
+  margin-bottom: var(--sp-6);
+}
+
+.about__prose p { font-size: var(--fs-lead); line-height: var(--lh-normal); }
+.about__prose p + p { margin-top: var(--sp-5); }
+
+/* Oversize section numeral, offset off the grid and parallaxed on scroll. */
+.numeral {
+  font-family: var(--font-mono);
+  font-size: var(--fs-numeral);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--rule);
+  letter-spacing: -0.02em;
+  user-select: none;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+   Contact
+   -------------------------------------------------------------------------- */
+
+.contact__headline {
+  font-size: var(--fs-display);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-variation-settings: "wght" 600, "wdth" 92;
+  margin-bottom: var(--sp-6);
+}
+
+.contact__channels { border-top: var(--hairline) solid var(--ink); margin-top: var(--sp-7); }
+
+.contact__channel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-block: var(--sp-4);
+  border-bottom: var(--hairline) solid var(--rule);
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+/* Row nudges inward on hover. Transform, not padding — a hover state has
+   no business triggering layout. */
+@media (hover: hover) and (pointer: fine) {
+  a.contact__channel:hover { transform: translateX(var(--sp-3)); }
+}
+
+.contact__channel-value {
+  font-size: var(--fs-3);
+  font-variation-settings: "wght" 500;
+}
+
+a.contact__channel:hover .contact__channel-value { color: var(--accent); }
+
+.contact__channel-ext {
+  display: inline-block;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+a.contact__channel:hover .contact__channel-ext { transform: translate(0.25rem, -0.25rem); }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.colophon {
+  border-top: var(--hairline) solid var(--rule);
+  padding-block: var(--sp-6) var(--sp-7);
+}
+
+.colophon__grid {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.colophon__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--ink-2);
+}
+
+/* --------------------------------------------------------------------------
+   Contextual cursor
+   --------------------------------------------------------------------------
+   The native cursor is never hidden. This is an additional label that
+   appears only over elements declaring `data-cursor`, so it communicates
+   context without taking over pointer feedback.
+   -------------------------------------------------------------------------- */
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  background-color: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-100vw, 0, 0);
+  transition: opacity var(--dur-fast) var(--ease-out);
+  will-change: transform, opacity;
+}
+
+.cursor.is-visible { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   Reveals
+   --------------------------------------------------------------------------
+   Three distinct behaviours, chosen per content type rather than one
+   translateY applied to everything:
+     mask  — headline type wiped in from below a clipped edge
+     rule  — a hairline drawing out from the left, children following
+     rise  — short, small-amplitude lift for body/meta blocks
+   -------------------------------------------------------------------------- */
+
+/* Every hidden starting state is scoped to `.js`, which is set inline in
+   <head> before first paint. Without JavaScript the content is simply
+   present — a reveal that can never fire must not hide anything. */
+
+/* padding-bottom keeps descenders from being clipped by the mask edge. */
+.js [data-reveal="mask"] { overflow: hidden; padding-bottom: 0.14em; }
+
+.js [data-reveal="mask"] > * {
+  transform: translateY(105%);
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.js [data-reveal="mask"].is-in > * { transform: translateY(0); }
+
+.js [data-reveal="rule"] {
+  border-top-color: transparent;
+  position: relative;
+}
+
+.js [data-reveal="rule"]::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: var(--hairline);
+  background-color: var(--rule);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.js [data-reveal="rule"].is-in::before { transform: scaleX(1); }
+
+.js [data-reveal="rise"] {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.js [data-reveal="rise"].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger is expressed as a custom property set in the HTML, so the delay
+   stays visible where the markup order is. */
+.js [data-reveal] { transition-delay: calc(var(--i, 0) * 60ms); }
+.js [data-reveal="mask"] > * { transition-delay: calc(var(--i, 0) * 60ms); }
+
+/* --------------------------------------------------------------------------
+   Debug grid — Alt+G. A developer easter egg that also documents the grid.
+   -------------------------------------------------------------------------- */
+
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  pointer-events: none;
+  display: none;
+  padding-inline: var(--page-x);
+  margin-inline: auto;
+  max-width: 96rem;
+}
+
+.grid-overlay.is-on { display: grid; }
+
+.grid-overlay span { background-color: var(--accent-wash); }
