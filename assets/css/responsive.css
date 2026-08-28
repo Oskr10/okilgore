@@ -150,6 +150,151 @@
   .about__body    { grid-column: 4 / span 7; }
 }
 
+
+/* --------------------------------------------------------------------------
+   V2 — visual work composition
+   --------------------------------------------------------------------------
+   The four project layouts are deliberately different from one another. That
+   variation is the point: five identical cards would undo the whole exercise.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 48em) {
+  .morework { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gutter); }
+  .beyond__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gutter); }
+  .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project__meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 64em) {
+  /* --- Hero: the collage overlaps into the right rail ------------------ */
+  .hero__visual {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    column-gap: var(--gutter);
+    align-items: start;
+    margin-top: var(--sp-7);
+  }
+
+  .hero__shot--main { grid-column: 1 / span 8; grid-row: 1; }
+
+  /* The two crops overlap the dominant shot rather than sitting beside it. */
+  .hero__shot--b {
+    display: block;
+    grid-column: 8 / span 4;
+    grid-row: 1;
+    margin-top: 22%;
+    z-index: 2;
+  }
+
+  .hero__shot--c {
+    display: block;
+    grid-column: 11 / span 2;
+    grid-row: 1;
+    margin-top: -8%;
+    z-index: 3;
+  }
+
+  /* --- 01: asymmetric split, image bleeds past the right rail ---------- */
+  .project--split {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    column-gap: var(--gutter);
+    align-items: start;
+  }
+
+  .project--split .project__body {
+    grid-column: 1 / span 4;
+    position: sticky;
+    top: 7rem;
+  }
+
+  .project--split .project__figure {
+    grid-column: 5 / -1;
+    margin-inline-end: calc(-1 * var(--page-x));
+  }
+
+  /* --- 02: text on the rail, image edge to edge ------------------------ */
+  .project--bleed .project__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-6);
+    margin-bottom: var(--sp-5);
+  }
+
+  .project--bleed .project__desc { margin-bottom: 0; max-width: 52ch; }
+
+  .project--bleed .project__foot {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--sp-6);
+    margin-top: var(--sp-5);
+  }
+
+  .project--bleed .project__meta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 0;
+    flex: 1 1 auto;
+    max-width: 44rem;
+  }
+
+  /* --- 03: desktop and mobile as one overlapping composition ----------- */
+  .project--pair {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    column-gap: var(--gutter);
+    align-items: end;
+  }
+
+  .project--pair .project__body { grid-column: 1 / span 3; grid-row: 1; align-self: start; }
+  .project--pair .project__pair { grid-column: 4 / -1; grid-row: 1; position: relative; }
+  .project--pair .project__pair-desktop { inline-size: 88%; }
+
+  .project--pair .project__pair-mobile {
+    position: absolute;
+    right: 0;
+    bottom: -8%;
+    inline-size: 26%;
+    max-inline-size: none;
+    margin-top: 0;
+    z-index: 2;
+  }
+
+  /* --- Sections --------------------------------------------------------- */
+  .beyond__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+
+  .beyond__aside { grid-column: 1 / span 5; position: sticky; top: 8rem; align-self: start; }
+  .beyond__content { grid-column: 7 / -1; }
+  .beyond__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
+
+  .caps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  .morework { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* --- About: portrait breaks the grid slightly ------------------------ */
+  .about__inner { align-items: start; }
+  .about__portrait { grid-column: 1 / span 3; grid-row: 1; margin-top: var(--sp-8); }
+  .about__body { grid-column: 5 / span 7; grid-row: 1; }
+  .career { grid-column: 5 / span 7; }
+
+  .career__item {
+    grid-template-columns: 9rem 1fr 1fr;
+    gap: var(--sp-4);
+    align-items: baseline;
+  }
+}
+
+@media (min-width: 90em) {
+  .project--split .project__body { grid-column: 1 / span 3; }
+  .project--split .project__figure { grid-column: 4 / -1; }
+}
+
 /* --------------------------------------------------------------------------
    Pointer / input capability
    --------------------------------------------------------------------------

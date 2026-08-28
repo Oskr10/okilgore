@@ -986,3 +986,272 @@ a.contact__channel:hover .contact__channel-ext { transform: translate(0.25rem, -
 .grid-overlay.is-on { display: grid; }
 
 .grid-overlay span { background-color: var(--accent-wash); }
+
+/* ==========================================================================
+   V2 — visual work
+   --------------------------------------------------------------------------
+   Added for the designer/developer repositioning. The rule throughout: real
+   screenshots carry the visual weight, so these components are frames and
+   metadata, never decoration.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Shared figure treatment
+   --------------------------------------------------------------------------
+   A hairline and a flat surface. No rounded corners beyond 2px, no drop
+   shadows, no device mockups, no perspective — the website in the screenshot
+   is the visual.
+   -------------------------------------------------------------------------- */
+
+.shot {
+  display: block;
+  margin: 0;
+  background-color: var(--card-bg);
+  border: var(--hairline) solid var(--rule-strong);
+  overflow: hidden;
+}
+
+.shot img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+/* Screenshots are always visible; hover only adds emphasis. */
+@media (hover: hover) and (pointer: fine) {
+  a:hover .shot img { transform: scale(1.015); }
+}
+
+.shot figcaption {
+  padding: var(--sp-2) var(--sp-3);
+  border-top: var(--hairline) solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   Hero visual composition
+   -------------------------------------------------------------------------- */
+
+.hero__visual {
+  position: relative;
+  margin-top: var(--sp-6);
+}
+
+.hero__shot--main { position: relative; z-index: 1; }
+.hero__shot--b,
+.hero__shot--c { display: none; }
+
+/* --------------------------------------------------------------------------
+   Project — shared metadata
+   -------------------------------------------------------------------------- */
+
+.project { position: relative; padding-block: var(--sp-7); }
+.project + .project { border-top: var(--hairline) solid var(--rule); }
+
+.project__eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  margin-bottom: var(--sp-3);
+}
+
+.project__title {
+  font-size: var(--fs-index);
+  line-height: 1.04;
+  font-variation-settings: "wght" 560, "wdth" 96;
+  margin-bottom: var(--sp-3);
+}
+
+.project__desc {
+  color: var(--ink-2);
+  max-width: 46ch;
+  margin-bottom: var(--sp-5);
+}
+
+.project__meta {
+  display: grid;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
+}
+
+.project__meta dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: var(--sp-1);
+}
+
+.project__meta dd { margin: 0; color: var(--ink); }
+
+.project__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.project__cta-arrow { transition: transform var(--dur-med) var(--ease-out); }
+a:hover .project__cta-arrow { transform: translateX(0.35rem); }
+
+/* --- 02 breaks the rail entirely ---------------------------------------- */
+
+.project--bleed .shot {
+  margin-inline: calc(-1 * var(--page-x));
+  border-inline: 0;
+}
+
+/* --- 03 pairs desktop with mobile --------------------------------------- */
+
+.project__pair { position: relative; }
+.project__pair-mobile { margin-top: var(--sp-4); max-inline-size: 60%; }
+
+/* --------------------------------------------------------------------------
+   More work — the two full websites
+   -------------------------------------------------------------------------- */
+
+.morework { display: grid; gap: var(--sp-7); margin-top: var(--sp-6); }
+
+.morework__item .shot { margin-bottom: var(--sp-4); }
+
+.morework__title {
+  font-size: var(--fs-3);
+  font-variation-settings: "wght" 560, "wdth" 96;
+  margin-bottom: var(--sp-2);
+}
+
+.morework__desc { color: var(--ink-2); font-size: var(--fs-body); margin-bottom: var(--sp-3); }
+
+.morework__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  margin-bottom: var(--sp-3);
+}
+
+/* --------------------------------------------------------------------------
+   Beyond the build
+   -------------------------------------------------------------------------- */
+
+.beyond__headline {
+  font-size: var(--fs-2);
+  line-height: 1.1;
+  font-variation-settings: "wght" 520, "wdth" 96;
+  max-width: 22ch;
+  margin-bottom: var(--sp-5);
+}
+
+.beyond__grid { display: grid; gap: var(--sp-6); margin-top: var(--sp-6); }
+
+.beyond__group { border-top: var(--hairline) solid var(--ink); padding-top: var(--sp-4); }
+
+.beyond__name {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--sp-3);
+}
+
+.beyond__list { display: grid; gap: var(--sp-2); }
+
+.beyond__list li {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* --------------------------------------------------------------------------
+   About — deliberately less systematic than the rest of the page
+   -------------------------------------------------------------------------- */
+
+.about__opener {
+  font-size: var(--fs-1);
+  line-height: 1.04;
+  font-variation-settings: "wght" 560, "wdth" 94;
+  max-width: 16ch;
+  margin-bottom: var(--sp-6);
+}
+
+.about__portrait { margin-bottom: var(--sp-6); }
+.about__portrait img { inline-size: 100%; block-size: auto; }
+
+.about__closer {
+  margin-top: var(--sp-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+
+/* --- Career path -------------------------------------------------------- */
+
+.career { margin-top: var(--sp-7); border-top: var(--hairline) solid var(--ink); }
+
+.career__item {
+  display: grid;
+  gap: var(--sp-1);
+  padding-block: var(--sp-4);
+  border-bottom: var(--hairline) solid var(--rule);
+}
+
+.career__years {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  color: var(--accent);
+}
+
+.career__role {
+  font-size: var(--fs-body);
+  font-variation-settings: "wght" 560;
+  color: var(--ink);
+}
+
+.career__org { color: var(--ink-3); font-size: var(--fs-body); }
+
+/* --------------------------------------------------------------------------
+   Contact — V2 additions
+   -------------------------------------------------------------------------- */
+
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin-top: var(--sp-6);
+}
+
+.contact__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4) var(--sp-6);
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: var(--hairline) solid var(--rule);
+}
+
+/* A single large line under a section head. Used sparingly — it is the only
+   display-size type outside the hero, About and Contact. */
+.section__statement {
+  font-size: var(--fs-2);
+  line-height: 1.1;
+  font-variation-settings: "wght" 520, "wdth" 96;
+  max-width: 24ch;
+  margin-bottom: var(--sp-7);
+}
+
+.contact__label { margin-bottom: var(--sp-4); }

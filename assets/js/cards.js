@@ -12,6 +12,10 @@
  *   frontLabel  string[] → one entry per printed line (CSS uppercases it)
  *   description string   → the reverse face
  *   note        string?  → optional second line on the reverse
+ *   titleSize   string?  → "long" or "xlong"; steps the front title down
+ *                          for labels that would otherwise overrun the
+ *                          card. Classified here, in the data, so no
+ *                          JavaScript ever measures typography at runtime.
  *
  * Exposed as a global rather than an ES module so the site keeps working
  * from file:// — same reason as window.OK in utils.js.
@@ -28,6 +32,7 @@ window.OK_CARDS = (function () {
       category: 'DEVELOPMENT',
       type: 'PLATFORM',
       frontLabel: ['WordPress'],
+      titleSize: 'long',
       description: 'My primary CMS experience — development, maintenance, troubleshooting, security and production support.',
       note: null
     },
@@ -46,6 +51,7 @@ window.OK_CARDS = (function () {
       category: 'DEVELOPMENT',
       type: 'LANGUAGE',
       frontLabel: ['JavaScript'],
+      titleSize: 'long',
       description: 'Frontend functionality, debugging, integrations and interactive experiences — including this one.',
       note: null
     },
@@ -91,6 +97,7 @@ window.OK_CARDS = (function () {
       category: 'DEVELOPMENT',
       type: 'ECOMMERCE',
       frontLabel: ['WooCommerce'],
+      titleSize: 'xlong',
       description: 'Product functionality, checkout customization and third-party integrations.',
       note: null
     },
@@ -111,6 +118,7 @@ window.OK_CARDS = (function () {
       category: 'WEBOPS',
       type: 'ABILITY',
       frontLabel: ['Debugging'],
+      titleSize: 'long',
       description: 'Give me the symptom first. Finding the actual problem is the interesting part.',
       note: null
     },
@@ -120,6 +128,7 @@ window.OK_CARDS = (function () {
       category: 'WEBOPS',
       type: 'ABILITY',
       frontLabel: ['Root cause', 'analysis'],
+      titleSize: 'long',
       description: 'I prefer understanding why something failed rather than stopping once it works again.',
       note: null
     },
@@ -156,6 +165,7 @@ window.OK_CARDS = (function () {
       category: 'WEBOPS',
       type: 'PERFORMANCE',
       frontLabel: ['Performance'],
+      titleSize: 'xlong',
       description: 'Caching, JavaScript optimization, production regressions and figuring out which optimization optimized the website into not working.',
       note: null
     },
@@ -185,6 +195,7 @@ window.OK_CARDS = (function () {
       category: 'EXPERIENCE',
       type: 'ABILITY',
       frontLabel: ['Client', 'communication'],
+      titleSize: 'xlong',
       description: 'Technical problems still need to make sense to the person paying to have them fixed.',
       note: null
     },
@@ -212,6 +223,7 @@ window.OK_CARDS = (function () {
       category: 'EXPERIENCE',
       type: 'MANAGEMENT',
       frontLabel: ['Leadership'],
+      titleSize: 'long',
       description: 'Before moving fully into web work, I managed a customer-service team of approximately 20 people.',
       note: null
     },
@@ -250,6 +262,7 @@ window.OK_CARDS = (function () {
       category: 'PERSONAL',
       type: 'INTEREST',
       frontLabel: ['MTG player'],
+      titleSize: 'long',
       description: 'If the Mulligan button didn’t already give this away: yes, I play Magic.',
       note: 'Commander player.'
     },
@@ -286,6 +299,7 @@ window.OK_CARDS = (function () {
       category: 'PERSONAL',
       type: 'INTEREST',
       frontLabel: ['Photography'],
+      titleSize: 'xlong',
       description: 'One of my interests outside development and part of my earlier design background.',
       note: null
     }

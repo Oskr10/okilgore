@@ -168,7 +168,7 @@
   display: flex;
   flex-direction: column;
   padding: var(--sp-4);
-  background-color: var(--paper-raised);
+  background-color: var(--card-bg);
   border: var(--hairline) solid var(--rule);
   backface-visibility: hidden;
   transition: border-color var(--dur-fast) var(--ease-out);
@@ -187,16 +187,28 @@
   color: var(--ink-3);
 }
 
+/* Titles are sized by CONTENT, not by viewport alone. Cards carry an
+   optional `titleSize` in cards.js which maps to the modifiers below, so
+   the four long single words never need runtime measurement.
+
+   overflow-wrap matters more than the clamp here: COMMUNICATION and
+   WOOCOMMERCE are single words, and no font-size alone will wrap them. */
 .oh-card__title {
   margin-top: auto;
-  font-size: 1.125rem;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-size: var(--card-title, clamp(1rem, 0.92rem + 0.36vw, 1.125rem));
+  line-height: 0.98;
+  letter-spacing: -0.015em;
   font-variation-settings: "wght" 560, "wdth" 94;
   text-transform: uppercase;
   color: var(--ink);
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-wrap: balance;
   transition: transform var(--dur-fast) var(--ease-out);
 }
+
+.oh-card__title--long  { --card-title: clamp(0.875rem, 0.8rem + 0.3vw, 1rem); }
+.oh-card__title--xlong { --card-title: clamp(0.78rem, 0.72rem + 0.24vw, 0.875rem); }
 
 .oh-card__rule {
   inline-size: 40%;
@@ -244,7 +256,7 @@
 
 .oh-card--webops .oh-card__rule { background-color: var(--accent); }
 .oh-card--experience .oh-card__meta { color: var(--ink); }
-.oh-card--personal .oh-card__face { background-color: var(--paper-sunk); }
+.oh-card--personal .oh-card__face { background-color: var(--card-bg-personal); }
 
 /* --------------------------------------------------------------------------
    THE BUG
@@ -268,7 +280,7 @@
   right: -1px;
   inline-size: var(--hairline);
   block-size: 16px;
-  background-color: var(--paper-raised);
+  background-color: var(--card-bg);
 }
 
 .oh-card--bug .oh-card__action { color: var(--accent); }
@@ -555,8 +567,14 @@
   .oh-hand__slot:hover + .oh-hand__slot .oh-card { --nudge: 10px; }
   .oh-hand__slot:has(+ .oh-hand__slot:hover) .oh-card { --nudge: -10px; }
 
-  /* The rest of the hand recedes while one card is active. */
-  .oh-hand:has(.oh-card:hover) .oh-card:not(:hover) { opacity: 0.72; }
+  /* The rest of the hand recedes while one card is active.
+     Done with COLOUR, never with opacity: the cards sit on a patterned
+     background, and an alpha dim would let the pattern show straight
+     through them. Card surfaces stay fully opaque at all times. */
+  .oh-hand:has(.oh-card:hover) .oh-card:not(:hover) .oh-card__face { border-color: var(--rule); }
+  .oh-hand:has(.oh-card:hover) .oh-card:not(:hover) .oh-card__title { color: var(--ink-3); }
+  .oh-hand:has(.oh-card:hover) .oh-card:not(:hover) .oh-card__meta,
+  .oh-hand:has(.oh-card:hover) .oh-card:not(:hover) .oh-card__foot { color: var(--rule-strong); }
 
   /* Investigation Mode gets the sticky-aside composition used elsewhere. */
   .oh__incident {
@@ -586,8 +604,6 @@
     --hand-card-h: 236px;
     --hand-step: 140px;
   }
-
-  .oh-card__title { font-size: 1.25rem; }
 }
 
 /* --------------------------------------------------------------------------

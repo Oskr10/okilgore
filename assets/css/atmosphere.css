@@ -1,0 +1,127 @@
+/* ==========================================================================
+   atmosphere.css — background pattern and cursor spotlight
+   Oscar Kilgore — portfolio
+   --------------------------------------------------------------------------
+   Two fixed layers behind the page. Both are purely decorative: aria-hidden,
+   pointer-transparent, and carrying no information.
+
+   THE PERFORMANCE PROBLEM THIS SOLVES
+   The obvious build is a full-viewport radial-gradient whose position follows
+   the pointer. That repaints the entire screen every frame. Instead:
+
+     .atmos            fixed, full-screen, mask = the cross pattern
+       .atmos__base    full-screen, flat --pattern colour
+       .atmos__glow    900x900 radial gradient, moved with translate3d only
+
+   The mask is computed once and never recalculates. Only a transform changes
+   per frame, so the effect is compositor-only.
+
+   Because the mask clips BOTH children to 1px crosses, the accent can only
+   ever appear inside those strokes. There is no visible circle and no glowing
+   blob — the cursor appears to tint the grid underneath the page.
+   ========================================================================== */
+
+.atmos {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  /* A small technical cross, repeated every 32px. Drawn as a mask so the
+     colour comes from --pattern rather than being baked into the SVG. */
+  --cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M16 13v6M13 16h6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+
+  -webkit-mask-image: var(--cross);
+  mask-image: var(--cross);
+  -webkit-mask-size: 32px 32px;
+  mask-size: 32px 32px;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+}
+
+.atmos__base {
+  position: absolute;
+  inset: 0;
+  background-color: var(--pattern);
+}
+
+/* The moving part. Sized generously so its soft edge is never visible, and
+   translated from its own centre so --glow-x/--glow-y read as the pointer. */
+.atmos__glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  inline-size: 900px;
+  block-size: 900px;
+  margin: -450px 0 0 -450px;
+  background: radial-gradient(
+    circle closest-side,
+    var(--accent) 0%,
+    color-mix(in srgb, var(--accent) 45%, transparent) 38%,
+    transparent 70%
+  );
+  opacity: 0.55;
+  transform: translate3d(var(--glow-x), var(--glow-y), 0);
+  will-change: transform;
+}
+
+/* Sunk bands paint their own fill over the fixed layer, so they carry a
+   matching pattern of their own. The spotlight does not reach inside them —
+   an accepted trade for keeping the approved banding. */
+.section--sunk { position: relative; }
+
+.section--sunk::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--pattern-sunk);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M16 13v6M13 16h6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M16 13v6M13 16h6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  -webkit-mask-size: 32px 32px;
+  mask-size: 32px 32px;
+}
+
+.section--sunk > * { position: relative; }
+
+/* Content sits above the fixed layer. */
+.masthead,
+main,
+.colophon { position: relative; z-index: 1; }
+
+/* --------------------------------------------------------------------------
+   Touch / no-pointer: the glow parks at per-section positions instead of
+   following anything. atmosphere.js sets --glow-x/--glow-y on scroll into
+   view; the transition is what makes it read as atmosphere rather than
+   as a moving object.
+   -------------------------------------------------------------------------- */
+
+@media (hover: none), (pointer: coarse) {
+  .atmos__glow {
+    inline-size: 120vmax;
+    block-size: 120vmax;
+    margin: calc(-60vmax) 0 0 calc(-60vmax);
+    opacity: 0.4;
+    transition: transform 1.2s var(--ease-in-out);
+    will-change: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion — the pattern stays (it is texture, not movement), the
+   glow parks in one place and never moves again.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .atmos__glow {
+    transition: none;
+    transform: translate3d(50vw, 30vh, 0);
+  }
+}
+
+/* Printing has no use for either layer. */
+@media print {
+  .atmos { display: none; }
+  .section--sunk::before { display: none; }
+}

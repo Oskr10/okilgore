@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="assets/css/atmosphere.css">
 <link rel="stylesheet" href="assets/css/opening-hand.css">
 
 <!-- The only inline script on the page. Both statements have to run before
@@ -53,6 +54,14 @@
 
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Decorative only. The mask is the cross pattern; the glow inside it is
+     moved with a transform so following the pointer never repaints the
+     screen. See assets/css/atmosphere.css. -->
+<div class="atmos" aria-hidden="true">
+  <div class="atmos__base"></div>
+  <div class="atmos__glow" data-atmos-glow></div>
+</div>
 
 <!-- ==========================================================================
      Masthead
@@ -177,187 +186,198 @@
     <div class="hero__inner">
 
       <p class="hero__label mono">
-        <span class="mono--ink">Web&nbsp;Developer</span>
+        <span class="mono--ink">Web&nbsp;Designer &amp; Developer</span>
         <span class="hero__label-sep" aria-hidden="true"></span>
-        <span>WordPress / Shopify / WebOps</span>
+        <span>WordPress / Shopify / Web support</span>
       </p>
 
-      <h1 class="hero__headline" data-vf-headline>I build websites — and fix them when things get complicated.</h1>
+      <h1 class="hero__headline" data-vf-headline>I design and build websites — and fix them when things get complicated.</h1>
 
       <div class="hero__body">
-        <p class="lead">I'm a web developer specializing in WordPress, Shopify, e-commerce, technical troubleshooting and website support. I work across frontend development, hosting, integrations, performance and security to solve problems that don't always have obvious answers.</p>
+        <p class="lead">I work across web design, WordPress, Shopify and production support — creating responsive interfaces, implementing them, and troubleshooting the problems that show up after launch.</p>
       </div>
 
       <dl class="hero__meta">
-        <div>
-          <dt>Based in</dt>
-          <dd>Honduras</dd>
-        </div>
-        <div>
-          <dt>Availability</dt>
-          <dd><span class="pip" aria-hidden="true"></span>Remote, worldwide</dd>
-        </div>
-        <div>
-          <dt>Local time</dt>
-          <dd class="mono mono--ink" data-local-time>—</dd>
-        </div>
+        <div><dt>Design</dt><dd>Web design</dd></div>
+        <div><dt>Build</dt><dd>WordPress &middot; Shopify</dd></div>
+        <div><dt>Support</dt><dd>Web support</dd></div>
       </dl>
 
       <div class="hero__actions">
         <a class="btn" href="#work" data-magnetic>
-          <span data-magnetic-inner>View selected work</span>
-          <span class="btn__arrow" aria-hidden="true">→</span>
+          <span data-magnetic-inner>View my work</span>
+          <span class="btn__arrow" aria-hidden="true">↓</span>
         </a>
-        <a class="btn btn--quiet" href="#contact">Contact me</a>
+        <a class="btn btn--quiet" href="#about">About me</a>
+      </div>
+
+      <!-- REPLACE: three real screenshots. The dominant one carries the page;
+           the two crops overlap it from the right at 64em and up. -->
+      <div class="hero__visual">
+        <figure class="shot hero__shot--main">
+          <img src="assets/images/placeholders/hero-a.svg" alt="Placeholder: main landing page screenshot" width="1600" height="1000" fetchpriority="high" decoding="async">
+        </figure>
+        <figure class="shot hero__shot--b">
+          <img src="assets/images/placeholders/hero-b.svg" alt="Placeholder: interface detail crop" width="800" height="600" loading="lazy" decoding="async">
+        </figure>
+        <figure class="shot hero__shot--c">
+          <img src="assets/images/placeholders/hero-c.svg" alt="Placeholder: mobile screenshot" width="520" height="1040" loading="lazy" decoding="async">
+        </figure>
       </div>
 
     </div>
   </section>
 
   <!-- ========================================================================
-       Selected work
+       Featured work — three landing pages, three different layouts
        ======================================================================== -->
   <section class="section section--after-hero shell" id="work" aria-labelledby="work-title">
 
     <header class="section__head" data-reveal="rise">
-      <h2 class="section__title" id="work-title">Selected work</h2>
-      <p class="section__note">A selection of development, troubleshooting and technical projects.</p>
+      <h2 class="section__title" id="work-title">Selected / 05</h2>
+      <p class="section__note">A selection of web design and development work across landing pages, WordPress, Shopify and responsive frontend implementation.</p>
     </header>
 
-    <!-- Phase 1 build note. Delete this element and the data-pending
-         attributes below once the case-study pages exist. -->
-    <p class="build-note" role="note">
-      Phase&nbsp;1 — the index below is the finished interaction design. The six case-study pages are Phase&nbsp;2 and are not built yet.
-    </p>
-    <p class="build-note" role="status" data-work-note hidden></p>
+    <p class="section__statement">Landing pages and websites built around clear goals.</p>
 
-    <ol class="index" data-work-index data-reveal="rule">
+    <!-- 01 — asymmetric split -------------------------------------------- -->
+    <article class="project project--split">
+      <div class="project__body">
+        <p class="project__eyebrow mono"><span>01</span><span class="mono--accent">Landing page</span></p>
+        <h3 class="project__title">[LANDING PAGE 01 — PROJECT NAME]</h3>
+        <p class="project__desc">[SHORT DESCRIPTION — one or two sentences on what this page needed to do.]</p>
+        <dl class="project__meta">
+          <div><dt>Role</dt><dd>Web design / UI / Implementation</dd></div>
+          <div><dt>Platform</dt><dd>[PLATFORM]</dd></div>
+        </dl>
+        <a class="project__cta" href="projects/landing-page-01/">View project <span class="project__cta-arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="project__figure">
+        <figure class="shot">
+          <img src="assets/images/placeholders/landing-01.svg" alt="Placeholder: landing page 01 screenshot" width="1600" height="1100" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </article>
 
-      <li class="index__row" data-reveal="rise" style="--i:0">
-        <a class="index__link" href="work/wordpress-security.html" data-project data-pending data-preview-label="01 — Security / Incident response">
-          <span class="index__num mono">01</span>
-          <h3 class="index__title">WordPress Malware &amp; Phishing Investigation</h3>
-          <p class="index__cat mono">Security / Incident response</p>
-          <p class="index__summary">Tracked down an intermittent phishing overlay that conventional website security scans were unable to identify.</p>
-          <ul class="index__stack">
-            <li>WordPress</li><li>PHP</li><li>JavaScript</li><li>MySQL</li><li>Chrome DevTools</li><li>Security scanning tools</li>
-          </ul>
-          <span class="index__cta mono">View case study <span class="index__cta-arrow" aria-hidden="true">→</span></span>
-          <span class="index__thumb">
-            <img src="assets/images/project-01-security.svg" alt="Placeholder: developer tools panel with an injected iframe node highlighted" width="1200" height="750" loading="lazy" decoding="async">
-          </span>
-        </a>
-      </li>
+    <!-- 02 — full-bleed break --------------------------------------------- -->
+    <article class="project project--bleed">
+      <div class="project__head">
+        <div>
+          <p class="project__eyebrow mono"><span>02</span><span class="mono--accent">Landing page</span></p>
+          <h3 class="project__title">[LANDING PAGE 02 — PROJECT NAME]</h3>
+        </div>
+        <p class="project__desc">[SHORT DESCRIPTION.]</p>
+      </div>
 
-      <li class="index__row" data-reveal="rise" style="--i:1">
-        <a class="index__link" href="work/shopify-product-architecture.html" data-project data-pending data-preview-label="02 — Shopify / E-commerce">
-          <span class="index__num mono">02</span>
-          <h3 class="index__title">Shopify Custom Product Architecture</h3>
-          <p class="index__cat mono">Shopify / E-commerce</p>
-          <p class="index__summary">Built custom product and collection functionality using Shopify Liquid, metafields, metaobjects and dynamic product data.</p>
-          <ul class="index__stack">
-            <li>Shopify</li><li>Liquid</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Metafields</li><li>Metaobjects</li>
-          </ul>
-          <span class="index__cta mono">View case study <span class="index__cta-arrow" aria-hidden="true">→</span></span>
-          <span class="index__thumb">
-            <img src="assets/images/project-02-shopify.svg" alt="Placeholder: Shopify product template with metafield-driven specification blocks" width="1200" height="750" loading="lazy" decoding="async">
-          </span>
-        </a>
-      </li>
+      <figure class="shot">
+        <img src="assets/images/placeholders/landing-02.svg" alt="Placeholder: landing page 02 screenshot" width="2400" height="1200" loading="lazy" decoding="async">
+      </figure>
 
-      <li class="index__row" data-reveal="rise" style="--i:2">
-        <a class="index__link" href="work/woocommerce-integration.html" data-project data-pending data-preview-label="03 — E-commerce / Integration">
-          <span class="index__num mono">03</span>
-          <h3 class="index__title">WooCommerce &amp; Third-Party Integration</h3>
-          <p class="index__cat mono">E-commerce / Integration</p>
-          <p class="index__summary">Implemented and troubleshot custom WooCommerce product, checkout and third-party integration functionality.</p>
-          <ul class="index__stack">
-            <li>WordPress</li><li>WooCommerce</li><li>PHP</li><li>JavaScript</li><li>APIs</li><li>Third-party integrations</li>
-          </ul>
-          <span class="index__cta mono">View case study <span class="index__cta-arrow" aria-hidden="true">→</span></span>
-          <span class="index__thumb">
-            <img src="assets/images/project-03-woocommerce.svg" alt="Placeholder: WooCommerce to third-party system integration diagram" width="1200" height="750" loading="lazy" decoding="async">
-          </span>
-        </a>
-      </li>
+      <div class="project__foot">
+        <dl class="project__meta">
+          <div><dt>Role</dt><dd>[ROLE]</dd></div>
+          <div><dt>Platform</dt><dd>[PLATFORM]</dd></div>
+          <div><dt>Year</dt><dd>[YEAR]</dd></div>
+        </dl>
+        <a class="project__cta" href="projects/landing-page-02/">View project <span class="project__cta-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </article>
 
-      <li class="index__row" data-reveal="rise" style="--i:3">
-        <a class="index__link" href="work/consent-analytics.html" data-project data-pending data-preview-label="04 — Privacy / Analytics">
-          <span class="index__num mono">04</span>
-          <h3 class="index__title">Consent Management &amp; Analytics</h3>
-          <p class="index__cat mono">Privacy / Analytics</p>
-          <p class="index__summary">Implemented consent-aware analytics and marketing tracking while controlling when third-party scripts were allowed to execute.</p>
-          <ul class="index__stack">
-            <li>Google Tag Manager</li><li>Google Analytics</li><li>Consent Mode</li><li>Cookiebot</li><li>Complianz</li><li>JavaScript</li>
-          </ul>
-          <span class="index__cta mono">View case study <span class="index__cta-arrow" aria-hidden="true">→</span></span>
-          <span class="index__thumb">
-            <img src="assets/images/project-04-consent.svg" alt="Placeholder: consent state matrix showing which tags fire before and after consent" width="1200" height="750" loading="lazy" decoding="async">
-          </span>
-        </a>
-      </li>
-
-      <li class="index__row" data-reveal="rise" style="--i:4">
-        <a class="index__link" href="work/performance-troubleshooting.html" data-project data-pending data-preview-label="05 — Performance / WebOps">
-          <span class="index__num mono">05</span>
-          <h3 class="index__title">Production Performance Troubleshooting</h3>
-          <p class="index__cat mono">Performance / WebOps</p>
-          <p class="index__summary">Diagnosed production functionality failures caused by JavaScript optimization and caching behavior.</p>
-          <ul class="index__stack">
-            <li>WordPress</li><li>JavaScript</li><li>WP Rocket</li><li>Chrome DevTools</li><li>Caching</li>
-          </ul>
-          <span class="index__cta mono">View case study <span class="index__cta-arrow" aria-hidden="true">→</span></span>
-          <span class="index__thumb">
-            <img src="assets/images/project-05-performance.svg" alt="Placeholder: network waterfall showing a deferred script blocking a checkout handler" width="1200" height="750" loading="lazy" decoding="async">
-          </span>
-        </a>
-      </li>
-
-      <li class="index__row" data-reveal="rise" style="--i:5">
-        <a class="index__link" href="work/wordpress-development.html" data-project data-pending data-preview-label="06 — Development">
-          <span class="index__num mono">06</span>
-          <h3 class="index__title">Custom WordPress Development</h3>
-          <p class="index__cat mono">Development</p>
-          <p class="index__summary">Built responsive custom functionality and layouts across production WordPress websites.</p>
-          <ul class="index__stack">
-            <li>WordPress</li><li>PHP</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>ACF</li>
-          </ul>
-          <span class="index__cta mono">View case study <span class="index__cta-arrow" aria-hidden="true">→</span></span>
-          <span class="index__thumb">
-            <img src="assets/images/project-06-wordpress.svg" alt="Placeholder: responsive layout at desktop, tablet and mobile widths" width="1200" height="750" loading="lazy" decoding="async">
-          </span>
-        </a>
-      </li>
-
-    </ol>
+    <!-- 03 — responsive pair ---------------------------------------------- -->
+    <article class="project project--pair">
+      <div class="project__body">
+        <p class="project__eyebrow mono"><span>03</span><span class="mono--accent">Landing page</span></p>
+        <h3 class="project__title">[LANDING PAGE 03 — PROJECT NAME]</h3>
+        <p class="project__desc">[SHORT DESCRIPTION.]</p>
+        <dl class="project__meta">
+          <div><dt>Role</dt><dd>Web design / Responsive UI / Implementation</dd></div>
+        </dl>
+        <a class="project__cta" href="projects/landing-page-03/">View project <span class="project__cta-arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="project__pair">
+        <figure class="shot project__pair-desktop">
+          <img src="assets/images/placeholders/landing-03.svg" alt="Placeholder: landing page 03, desktop view" width="1600" height="1000" loading="lazy" decoding="async">
+        </figure>
+        <figure class="shot project__pair-mobile">
+          <img src="assets/images/placeholders/landing-03-mobile.svg" alt="Placeholder: landing page 03, mobile view" width="520" height="1040" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </article>
   </section>
 
   <!-- ========================================================================
-       Problem solving
+       More work — the two full websites
        ======================================================================== -->
-  <section class="section section--sunk" aria-labelledby="problem-title">
-    <div class="shell">
-      <div class="problem__inner">
+  <section class="section shell" aria-labelledby="morework-title">
+    <header class="section__head" data-reveal="rise">
+      <h2 class="section__title" id="morework-title">More work / 02</h2>
+      <p class="section__note">Complete websites.</p>
+    </header>
 
-        <div class="problem__aside">
-          <h2 class="section__title mb-5" id="problem-title">How I work</h2>
-          <p class="problem__headline">Sometimes the job isn't building the page. It's figuring out why it broke.</p>
+    <div class="morework">
+      <article class="morework__item">
+        <a href="projects/website-01/">
+          <figure class="shot">
+            <img src="assets/images/placeholders/website-01.svg" alt="Placeholder: full website 01 screenshot" width="1200" height="900" loading="lazy" decoding="async">
+          </figure>
+          <p class="project__eyebrow mono"><span>04</span><span class="mono--accent">Full website</span></p>
+          <h3 class="morework__title">[FULL WEBSITE 01 — PROJECT NAME]</h3>
+          <p class="morework__desc">[SHORT DESCRIPTION.]</p>
+          <p class="morework__meta mono"><span>Role / [ROLE]</span><span>Platform / [PLATFORM]</span></p>
+          <span class="project__cta">View project <span class="project__cta-arrow" aria-hidden="true">→</span></span>
+        </a>
+      </article>
+
+      <article class="morework__item">
+        <a href="projects/website-02/">
+          <figure class="shot">
+            <img src="assets/images/placeholders/website-02.svg" alt="Placeholder: full website 02 screenshot" width="1200" height="900" loading="lazy" decoding="async">
+          </figure>
+          <p class="project__eyebrow mono"><span>05</span><span class="mono--accent">Full website</span></p>
+          <h3 class="morework__title">[FULL WEBSITE 02 — PROJECT NAME]</h3>
+          <p class="morework__desc">[SHORT DESCRIPTION.]</p>
+          <p class="morework__meta mono"><span>Role / [ROLE]</span><span>Platform / [PLATFORM]</span></p>
+          <span class="project__cta">View project <span class="project__cta-arrow" aria-hidden="true">→</span></span>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Beyond the build
+       ======================================================================== -->
+  <section class="section section--sunk" id="beyond-build" aria-labelledby="beyond-title">
+    <div class="shell">
+      <div class="beyond__inner">
+
+        <div class="beyond__aside">
+          <h2 class="section__title mb-5" id="beyond-title">Beyond the build</h2>
+          <p class="beyond__headline">A website doesn&rsquo;t stop being my problem when it launches.</p>
         </div>
 
-        <div class="problem__content">
+        <div class="beyond__content">
           <div class="prose" data-reveal="rise">
-            <p>A large part of my experience comes from supporting production websites where the solution isn't immediately obvious — broken integrations, plugin conflicts, malicious code, DNS issues, tracking problems, performance regressions and unexpected third-party behavior.</p>
-            <p>I enjoy tracing those problems back to their source and finding practical solutions.</p>
+            <p>A large part of my experience comes from supporting websites already in production — troubleshooting plugin conflicts, integrations, hosting, DNS, performance issues, security incidents and the occasional problem nobody can reproduce.</p>
           </div>
 
-          <ul class="problem__list">
-            <li class="problem__item" data-n="A">Malware hidden inside a WordPress database</li>
-            <li class="problem__item" data-n="B">JavaScript optimization breaking payment functionality</li>
-            <li class="problem__item" data-n="C">Consent configurations blocking or prematurely loading tracking</li>
-            <li class="problem__item" data-n="D">DNS pointing to incorrect infrastructure</li>
-            <li class="problem__item" data-n="E">Plugin conflicts causing production errors</li>
-            <li class="problem__item" data-n="F">Dynamic Shopify data requiring custom architecture</li>
-          </ul>
+          <div class="beyond__grid">
+            <section class="beyond__group">
+              <h3 class="beyond__name">Production</h3>
+              <ul class="beyond__list"><li>Hosting</li><li>DNS</li><li>SSL</li><li>Migrations</li></ul>
+            </section>
+            <section class="beyond__group">
+              <h3 class="beyond__name">Debugging</h3>
+              <ul class="beyond__list"><li>DevTools</li><li>Plugin conflicts</li><li>JavaScript</li><li>Root-cause investigation</li></ul>
+            </section>
+            <section class="beyond__group">
+              <h3 class="beyond__name">Performance</h3>
+              <ul class="beyond__list"><li>Caching</li><li>Frontend optimization</li><li>Production regressions</li></ul>
+            </section>
+            <section class="beyond__group">
+              <h3 class="beyond__name">Security</h3>
+              <ul class="beyond__list"><li>WordPress cleanup</li><li>Suspicious scripts</li><li>Database injections</li><li>SEO spam</li></ul>
+            </section>
+          </div>
         </div>
 
       </div>
@@ -371,63 +391,40 @@
 
     <header class="section__head" data-reveal="rise">
       <h2 class="section__title" id="caps-title">Capabilities</h2>
-      <p class="section__note">Grouped by the kind of problem rather than by logo.</p>
+      <p class="section__note">I tend to work across the boundaries between design, development and support rather than treating them as completely separate jobs.</p>
     </header>
 
+    <p class="section__statement">From first layout to production support.</p>
+
     <div class="caps">
-
       <section class="caps__group" data-reveal="rise" style="--i:0">
-        <h3 class="caps__name">Development</h3>
+        <h3 class="caps__name">Design</h3>
         <ul class="caps__list">
-          <li>WordPress</li><li>Shopify</li><li>WooCommerce</li><li>HTML</li>
-          <li>CSS</li><li>JavaScript</li><li>PHP</li><li>Liquid</li>
+          <li>Web design</li><li>UI design</li><li>Responsive design</li>
+          <li>Landing pages</li><li>Design systems</li><li>UX thinking</li>
         </ul>
       </section>
-
       <section class="caps__group" data-reveal="rise" style="--i:1">
-        <h3 class="caps__name">WordPress</h3>
+        <h3 class="caps__name">Build</h3>
         <ul class="caps__list">
-          <li>ACF</li><li>Elementor</li><li>Divi</li><li>Salient</li>
-          <li>Theme customization</li><li>Plugin troubleshooting</li>
-          <li>Custom functionality</li><li>Database troubleshooting</li>
+          <li>WordPress</li><li>Shopify</li><li>WooCommerce</li>
+          <li>HTML / CSS</li><li>JavaScript</li><li>PHP / Liquid</li>
         </ul>
       </section>
-
       <section class="caps__group" data-reveal="rise" style="--i:2">
-        <h3 class="caps__name">E-commerce</h3>
+        <h3 class="caps__name">Operate</h3>
         <ul class="caps__list">
-          <li>WooCommerce</li><li>Shopify</li><li>Product architecture</li>
-          <li>Checkout troubleshooting</li><li>Payment integrations</li>
-          <li>Third-party integrations</li>
+          <li>Hosting</li><li>DNS / SSL</li><li>Migrations</li>
+          <li>Analytics</li><li>CRM / Integrations</li><li>Consent management</li>
         </ul>
       </section>
-
-      <section class="caps__group" data-reveal="rise" style="--i:0">
-        <h3 class="caps__name">Web operations</h3>
+      <section class="caps__group" data-reveal="rise" style="--i:3">
+        <h3 class="caps__name">Investigate</h3>
         <ul class="caps__list">
-          <li>DNS</li><li>Hosting</li><li>SSL</li><li>Website migrations</li>
-          <li>SMTP</li><li>Performance</li><li>Caching</li>
-          <li>Production troubleshooting</li>
+          <li>Technical support</li><li>DevTools</li><li>Root cause analysis</li>
+          <li>Performance</li><li>Security</li><li>Production issues</li>
         </ul>
       </section>
-
-      <section class="caps__group" data-reveal="rise" style="--i:1">
-        <h3 class="caps__name">Security</h3>
-        <ul class="caps__list">
-          <li>Malware investigation</li><li>Database injection investigation</li>
-          <li>SEO spam investigation</li><li>Vulnerability remediation</li>
-          <li>Content Security Policy</li><li>Access auditing</li>
-        </ul>
-      </section>
-
-      <section class="caps__group" data-reveal="rise" style="--i:2">
-        <h3 class="caps__name">Analytics &amp; privacy</h3>
-        <ul class="caps__list">
-          <li>Google Tag Manager</li><li>Google Analytics</li>
-          <li>Google Consent Mode</li><li>Cookiebot</li><li>Complianz</li>
-        </ul>
-      </section>
-
     </div>
   </section>
 
@@ -437,22 +434,49 @@
   <section class="section shell" id="about" aria-labelledby="about-title">
     <div class="about__inner">
 
-      <p class="numeral about__numeral" data-parallax="26" aria-hidden="true">03</p>
+      <!-- Optional. Delete this figure and the section still composes. -->
+      <figure class="shot about__portrait">
+        <img src="assets/images/placeholders/portrait.svg" alt="Placeholder: portrait photograph of Oscar Kilgore" width="800" height="1000" loading="lazy" decoding="async">
+      </figure>
 
       <div class="about__body">
-        <h2 class="section__title mb-5" id="about-title">About</h2>
+        <h2 class="section__title mb-5" id="about-title">About / Oscar</h2>
 
         <div data-reveal="mask">
-          <p class="about__heading">I'm Oscar, a web developer based in Honduras.</p>
+          <p class="about__opener">I like the part where nobody knows what&rsquo;s wrong yet.</p>
         </div>
 
         <div class="about__prose prose">
-          <p>My background combines development with technical support. I've spent much of my professional experience working directly with real production websites — building new functionality, maintaining existing systems, investigating problems and communicating solutions to clients.</p>
-          <p>I primarily work with WordPress and Shopify, but I'm comfortable moving across the stack when a problem requires it.</p>
-          <p>One of the things I enjoy most about web development is troubleshooting. There's something satisfying about starting with “we don't know why this is happening” and eventually finding the answer.</p>
-          <p>I'm currently looking for a long-term remote opportunity where I can contribute as part of a development, e-commerce, support or web operations team.</p>
+          <p>I&rsquo;m Oscar, a web designer and developer based in Honduras.</p>
+          <p>My path into web work wasn&rsquo;t completely linear. I started in quality analysis, later managed a customer-service team, moved into UX/UI and web design, and eventually spent much more of my time building and supporting production websites.</p>
+          <p>That background has made me comfortable moving between very different parts of a project — talking with clients, thinking through layout and usability, implementing a design, or digging through an unfamiliar website when something breaks.</p>
+          <p>WordPress and Shopify are where I&rsquo;ve spent most of my recent time, but I&rsquo;m less interested in being tied to a specific platform than I am in understanding how something works and figuring out how to make it better.</p>
+          <p class="about__closer">And yes, the Mulligan button farther down the page is there for a reason.</p>
         </div>
       </div>
+
+      <ol class="career">
+        <li class="career__item">
+          <span class="career__years">2010–2014</span>
+          <span class="career__role">Quality analysis</span>
+          <span class="career__org">Allied Global BPO</span>
+        </li>
+        <li class="career__item">
+          <span class="career__years">2016–2020</span>
+          <span class="career__role">Team management</span>
+          <span class="career__org">Startek</span>
+        </li>
+        <li class="career__item">
+          <span class="career__years">2020–2023</span>
+          <span class="career__role">UX/UI design</span>
+          <span class="career__org">The Visual Cue</span>
+        </li>
+        <li class="career__item">
+          <span class="career__years">2025–2026</span>
+          <span class="career__role">Web development / Technical support</span>
+          <span class="career__org">Big Red Jelly</span>
+        </li>
+      </ol>
 
     </div>
   </section>
@@ -616,13 +640,30 @@
       <div class="contact__inner">
 
         <h2 class="visually-hidden" id="contact-title">Contact</h2>
+        <p class="contact__label mono mono--accent">Contact / Available</p>
 
         <div class="contact__headline-wrap" data-reveal="mask">
-          <p class="contact__headline">Let's work together.</p>
+          <p class="contact__headline">Have a website that needs to be designed, built, or figured out?</p>
         </div>
 
         <div class="contact__body prose">
-          <p class="lead">I'm currently available for remote opportunities in web development, WordPress, Shopify, WebOps and technical support.</p>
+          <p class="lead">I&rsquo;m currently open to remote opportunities involving web design, WordPress, Shopify, website support and frontend implementation.</p>
+
+          <div class="contact__actions">
+            <a class="btn" href="mailto:kilgore2010@gmail.com" data-magnetic>
+              <span data-magnetic-inner>Let&rsquo;s talk</span>
+              <span class="btn__arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="btn btn--quiet" href="resume/oscar-kilgore-resume.pdf">
+              View resume <span class="pending">TBA</span>
+            </a>
+          </div>
+
+          <dl class="contact__meta mono">
+            <div><dt>Based</dt><dd>Honduras</dd></div>
+            <div><dt>Working</dt><dd>Remote</dd></div>
+            <div><dt>Languages</dt><dd>EN + ES</dd></div>
+          </dl>
         </div>
 
         <div class="contact__channels">
@@ -632,11 +673,10 @@
             <span class="contact__channel-value">kilgore2010@gmail.com</span>
           </a>
 
-          <a class="contact__channel" href="#" data-cursor="external" rel="noopener">
+          <a class="contact__channel" href="#" rel="noopener">
             <span class="mono">LinkedIn</span>
             <span class="contact__channel-value">
               [ add profile URL ]
-              <span class="contact__channel-ext" aria-hidden="true">↗</span>
             </span>
           </a>
 
@@ -654,8 +694,6 @@
           </a>
 
         </div>
-
-        <p class="contact__aside mono">Replies usually<br>within a day</p>
 
       </div>
     </div>
@@ -700,6 +738,7 @@
      this blocks rendering. -->
 <script src="assets/js/utils.js" defer></script>
 <script src="assets/js/theme.js" defer></script>
+<script src="assets/js/atmosphere.js" defer></script>
 <script src="assets/js/cursor.js" defer></script>
 <script src="assets/js/magnetic.js" defer></script>
 <script src="assets/js/projects.js" defer></script>

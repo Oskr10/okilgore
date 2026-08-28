@@ -20,11 +20,32 @@
   --paper-raised: #fbf9f5;  /* preview surfaces */
   --ink:          #16150f;  /* primary type                      16.3:1 */
   --ink-2:        #4a473d;  /* secondary type                     8.4:1 */
-  --ink-3:        #6e6a5b;  /* metadata, mono labels              4.8:1 */
+  --ink-3:        #676355;  /* metadata, mono labels              4.8:1 */
   --rule:         #d8d3c6;  /* hairlines */
   --rule-strong:  #b9b3a3;
   --accent:       #b03a1e;  /* interaction, labels, links         5.4:1 */
   --accent-wash:  rgba(176, 58, 30, 0.08);
+
+  /* --- Derived surfaces ---------------------------------------------------
+     ONE formula, every palette. Because --ink is always the contrast colour
+     of its theme, mixing toward it darkens light palettes and lightens dark
+     ones automatically — no per-theme pattern values anywhere.
+
+     97% lands at roughly 2.5 L* on light themes and 3.0 L* on dark: read as
+     texture, not as a grid. The value is capped by contrast, not taste —
+     every text tone still clears AA when it lands directly on a pattern
+     stroke. See the contrast note in README.
+
+     --card-bg exists so Opening Hand cards have a guaranteed OPAQUE surface.
+     The pattern must never show through a card.                            */
+  --pattern:           transparent;   /* fallback: no pattern at all */
+  --pattern-sunk:      transparent;
+  --card-bg:           var(--paper-raised);
+  --card-bg-personal:  var(--paper-sunk);
+
+  /* Spotlight position, written by atmosphere.js. */
+  --glow-x: 50%;
+  --glow-y: 30%;
 
   /* --- Type --------------------------------------------------------------
      Two families only. Archivo is a variable font (wght 100–900,
@@ -129,7 +150,7 @@
   --paper-raised: #fbf9f5;
   --ink:          #16150f;
   --ink-2:        #4a473d;
-  --ink-3:        #6e6a5b;
+  --ink-3:        #676355;
   --rule:         #d8d3c6;
   --rule-strong:  #b9b3a3;
   --accent:       #b03a1e;
@@ -143,7 +164,7 @@
   --paper-raised: #f7f9fb;
   --ink:          #10151c;
   --ink-2:        #3c4654;
-  --ink-3:        #5d6b7d;
+  --ink-3:        #576475;
   --rule:         #cdd5df;
   --rule-strong:  #a6b1c0;
   --accent:       #2b4a9b;
@@ -157,7 +178,7 @@
   --paper-raised: #f9f8f2;
   --ink:          #14170f;
   --ink-2:        #454a3a;
-  --ink-3:        #666b57;
+  --ink-3:        #5f6451;
   --rule:         #d7d3c2;
   --rule-strong:  #b4b09c;
   --accent:       #3f6b3a;
@@ -185,7 +206,7 @@
   --paper-raised: #1b2028;
   --ink:          #e6ebf2;
   --ink-2:        #a3adbb;
-  --ink-3:        #7c8794;
+  --ink-3:        #7e8995;
   --rule:         #262c35;
   --rule-strong:  #3a424e;
   --accent:       #e0a020;
@@ -431,5 +452,17 @@ a {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Pattern colour — enabled only where color-mix() is available, so older
+   browsers simply get no pattern rather than an unverified one.
+   -------------------------------------------------------------------------- */
+
+@supports (color: color-mix(in srgb, red 50%, blue)) {
+  :root {
+    --pattern:      color-mix(in srgb, var(--paper) 97%, var(--ink));
+    --pattern-sunk: color-mix(in srgb, var(--paper-sunk) 97%, var(--ink));
   }
 }

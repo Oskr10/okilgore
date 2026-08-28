@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>[PROJECT 02 NAME] — Landing page — Oscar Kilgore</title>
+<meta name="description" content="[ONE-SENTENCE PROJECT SUMMARY] — landing page designed and built by Oscar Kilgore.">
+<meta name="author" content="Oscar Kilgore">
+
+<!-- TODO: set the canonical once the domain is live. -->
+<link rel="canonical" href="https://example.com/projects/landing-page-02/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[PROJECT 02 NAME] — Oscar Kilgore">
+<meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14130f" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<link rel="stylesheet" href="../../assets/css/responsive.css">
+<link rel="stylesheet" href="../../assets/css/atmosphere.css">
+<link rel="stylesheet" href="../../assets/css/project-page.css">
+
+<script>
+  document.documentElement.classList.add('js');
+  try {
+    var t = localStorage.getItem('ok-theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="atmos" aria-hidden="true">
+  <div class="atmos__base"></div>
+  <div class="atmos__glow" data-atmos-glow></div>
+</div>
+
+<header class="masthead" data-masthead>
+  <div class="masthead__inner">
+    <a class="wordmark" href="../../index.html" aria-label="Oscar Kilgore — home">
+      O<span class="wordmark__rest">scar&nbsp;</span>K<span class="wordmark__rest">ilgore</span><span class="wordmark__dot" aria-hidden="true"></span>
+    </a>
+    <div class="masthead__end">
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../../index.html#work"><span class="nav__roll" aria-hidden="true"><span>Work</span><span>Work</span></span><span class="visually-hidden">Work</span></a></li>
+          <li><a class="nav__link" href="../../index.html#capabilities"><span class="nav__roll" aria-hidden="true"><span>Capabilities</span><span>Capabilities</span></span><span class="visually-hidden">Capabilities</span></a></li>
+          <li><a class="nav__link" href="../../index.html#about"><span class="nav__roll" aria-hidden="true"><span>About</span><span>About</span></span><span class="visually-hidden">About</span></a></li>
+          <li><a class="nav__link" href="../../index.html#contact"><span class="nav__roll" aria-hidden="true"><span>Contact</span><span>Contact</span></span><span class="visually-hidden">Contact</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="theme" data-theme-picker>
+        <button class="theme__trigger" type="button" aria-expanded="false" aria-controls="theme-panel" aria-label="Colour theme" data-theme-trigger>
+          <span class="theme__chip" aria-hidden="true"></span>
+        </button>
+        <div class="theme__panel" id="theme-panel" hidden data-theme-panel>
+          <span class="theme__caption mono">Palette</span>
+          <div class="theme__wheel" role="radiogroup" aria-label="Colour theme">
+            <button class="theme__option" type="button" role="radio" aria-checked="true" tabindex="0" data-theme-value="auto" style="--chip-paper:#f4f1ea;--chip-ink:#16150f;--chip-accent:#14130f"><span class="theme__chip" aria-hidden="true"></span>Auto</button>
+            <button class="theme__option" type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-value="paper" style="--chip-paper:#f4f1ea;--chip-ink:#16150f;--chip-accent:#b03a1e"><span class="theme__chip" aria-hidden="true"></span>Paper</button>
+            <button class="theme__option" type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-value="blueprint" style="--chip-paper:#eef1f5;--chip-ink:#10151c;--chip-accent:#2b4a9b"><span class="theme__chip" aria-hidden="true"></span>Blueprint</button>
+            <button class="theme__option" type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-value="moss" style="--chip-paper:#f2f0e6;--chip-ink:#14170f;--chip-accent:#3f6b3a"><span class="theme__chip" aria-hidden="true"></span>Moss</button>
+            <button class="theme__option" type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-value="ink" style="--chip-paper:#14130f;--chip-ink:#efebe0;--chip-accent:#e4643f"><span class="theme__chip" aria-hidden="true"></span>Ink</button>
+            <button class="theme__option" type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-value="carbon" style="--chip-paper:#0f1216;--chip-ink:#e6ebf2;--chip-accent:#e0a020"><span class="theme__chip" aria-hidden="true"></span>Carbon</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ======================================================================
+       Project hero
+       ====================================================================== -->
+  <section class="pp-hero shell">
+    <p class="pp-hero__meta mono">
+      <span class="mono--ink">Project / 02</span>
+      <span class="mono--accent">Landing page</span>
+      <span>Year / [YEAR]</span>
+      <span>Role / [ROLE]</span>
+      <span>Platform / [PLATFORM]</span>
+    </p>
+
+    <h1 class="pp-hero__title">[PROJECT 02 NAME]</h1>
+    <p class="pp-hero__summary">[1–2 SENTENCE PROJECT SUMMARY]</p>
+
+    <figure class="shot pp-hero__shot">
+      <img src="../../assets/images/placeholders/landing-02.svg" alt="Placeholder: landing page 02 hero screenshot" width="2400" height="1200" fetchpriority="high" decoding="async">
+    </figure>
+  </section>
+
+  <div class="pp-body shell">
+
+  <section class="pp-section">
+    <div class="pp-section__inner">
+      <h2 class="pp-section__title">Overview</h2>
+      <div class="pp-section__content">
+        <div class="pp-prose">
+        <p>[Explain what the project was, who the website was for and what needed to be delivered.]</p>
+        </div>
+        <dl class="pp-facts">
+          <div><dt>Client / industry</dt><dd>[INDUSTRY]</dd></div>
+          <div><dt>Timeline</dt><dd>[TIMELINE]</dd></div>
+          <div><dt>Platform</dt><dd>[PLATFORM]</dd></div>
+        </dl>
+        <!-- Delete any fact above that has no real value. -->
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-section">
+    <div class="pp-section__inner">
+      <h2 class="pp-section__title">The goal</h2>
+      <div class="pp-section__content">
+        <p class="pp-section__lead">[What did this landing page need the visitor to understand or do?]</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-section">
+    <div class="pp-section__inner">
+      <h2 class="pp-section__title">Design direction</h2>
+      <div class="pp-section__content">
+        <div class="pp-prose">
+        <p>[Explain the visual direction, hierarchy, content priorities and design constraints.]</p>
+        </div>
+        <div class="pp-figures">
+          <figure class="shot">
+            <img src="../../assets/images/placeholders/hero-b.svg" alt="Placeholder: design detail" width="800" height="600" loading="lazy" decoding="async">
+            <figcaption>[SCREENSHOT DESCRIPTION]</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-section">
+    <div class="pp-section__inner">
+      <h2 class="pp-section__title">Building the story</h2>
+      <div class="pp-section__content">
+        <div class="pp-prose">
+        <p>[Explain how the page was structured to move the visitor through the content.]</p>
+        </div>
+        <ol class="pp-structure">
+          <li data-step="01">[HERO]</li>
+          <li data-step="02">[SECTION]</li>
+          <li data-step="03">[SECTION]</li>
+          <li data-step="04">[CTA]</li>
+        </ol>
+        <!-- Only list sections that actually exist on the page. -->
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-section">
+    <div class="pp-section__inner">
+      <h2 class="pp-section__title">Designed beyond desktop</h2>
+      <div class="pp-section__content">
+        <div class="pp-prose">
+        <p>[Explain important layout or interaction changes made for smaller screens.]</p>
+        </div>
+        <div class="pp-figures pp-figures--pair">
+          <figure class="shot">
+            <img src="../../assets/images/placeholders/landing-03.svg" alt="Placeholder: desktop layout" width="1600" height="1000" loading="lazy" decoding="async">
+            <figcaption>Desktop</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../../assets/images/placeholders/landing-03-mobile.svg" alt="Placeholder: mobile layout" width="520" height="1040" loading="lazy" decoding="async">
+            <figcaption>Mobile</figcaption>
+          </figure>
+        </div>
+        <!-- No mobile screenshot? Delete this whole section. -->
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-section">
+    <div class="pp-section__inner">
+      <h2 class="pp-section__title">From design to browser</h2>
+      <div class="pp-section__content">
+        <div class="pp-prose">
+        <p>[Explain how the page was implemented.]</p>
+        </div>
+        <dl class="pp-facts">
+          <div><dt>Platform</dt><dd>[PLATFORM]</dd></div>
+          <div><dt>Builder</dt><dd>[BUILDER]</dd></div>
+          <div><dt>Custom code</dt><dd>[CUSTOM CODE]</dd></div>
+          <div><dt>Integrations</dt><dd>[INTEGRATIONS]</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-section pp-section--final">
+    <div class="pp-section__inner">
+      <h2 class="pp-section__title">Final experience</h2>
+      <div class="pp-section__content">
+        <figure class="shot">
+          <img src="../../assets/images/placeholders/landing-02.svg" alt="Placeholder: finished landing page" width="2400" height="1200" loading="lazy" decoding="async">
+          <figcaption>[SCREENSHOT DESCRIPTION]</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-section">
+    <div class="pp-section__inner">
+      <h2 class="pp-section__title">My role</h2>
+      <div class="pp-section__content">
+        <div class="pp-prose">
+        <p>[Describe exactly what you personally designed, implemented, configured or supported — and what you did not. This section prevents any ambiguity about ownership.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-section">
+    <div class="pp-section__inner">
+      <h2 class="pp-section__title">Result</h2>
+      <div class="pp-section__content">
+        <div class="pp-prose">
+        <p>[Explain what was delivered and what improved. Qualitative is fine — only add numbers if you have real ones.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ======================================================================
+       Project navigation
+       ====================================================================== -->
+  <nav class="pp-next shell" aria-label="Project navigation">
+    <a class="pp-next__link" href="../../projects/landing-page-03/">
+      <figure class="shot pp-next__shot">
+        <img src="../../assets/images/placeholders/landing-03.svg" alt="Placeholder: landing page 03 screenshot" width="1600" height="1000" loading="lazy" decoding="async">
+      </figure>
+      <span>
+        <span class="mono">Next project / 03</span>
+        <span class="pp-next__title">[PROJECT 03 NAME]</span>
+      </span>
+    </a>
+    <a class="pp-next__all" href="../../index.html#work"><span aria-hidden="true">←</span> All work</a>
+  </nav>
+
+</main>
+
+<footer class="colophon shell">
+  <div class="colophon__grid">
+    <div>
+      <p class="mono mono--ink">Oscar Kilgore</p>
+      <p class="mono">Web Designer &amp; Developer</p>
+      <p class="mono">Honduras</p>
+    </div>
+    <div>
+      <p class="mono colophon__status"><span class="pip" aria-hidden="true"></span>Status: available for work</p>
+      <p class="mono mt-2">Local time <span data-local-time>—</span></p>
+    </div>
+    <div>
+      <p class="mono">Built from scratch with<br>HTML, CSS &amp; JavaScript</p>
+      <p class="mono mt-2"><a class="link" href="https://github.com/Oskr10/okilgore" target="_blank" rel="noopener" data-cursor="external">Source on GitHub ↗</a></p>
+    </div>
+    <div>
+      <p class="mono">&copy; <span data-year>2026</span></p>
+      <p class="mono"><a class="link" href="../../index.html">Home ↑</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/js/utils.js" defer></script>
+<script src="../../assets/js/theme.js" defer></script>
+<script src="../../assets/js/atmosphere.js" defer></script>
+<script src="../../assets/js/cursor.js" defer></script>
+<script src="../../assets/js/magnetic.js" defer></script>
+<script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+/* ==========================================================================
+   project-page.css — case-study pages
+   Oscar Kilgore — portfolio
+   --------------------------------------------------------------------------
+   Loaded only on pages under /projects/. Holds nothing the homepage already
+   provides: the masthead, theme wheel, background layers, footer, figure
+   treatment and every token are reused unchanged.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Project hero
+   -------------------------------------------------------------------------- */
+
+.pp-hero { padding-block: clamp(2rem, 4vw, 3.5rem) var(--sp-6); }
+
+.pp-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+  padding-bottom: var(--sp-4);
+  border-bottom: var(--hairline) solid var(--rule);
+  margin-bottom: var(--sp-5);
+}
+
+.pp-hero__title {
+  font-size: var(--fs-1);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  font-variation-settings: "wght" 580, "wdth" 94;
+  margin-bottom: var(--sp-4);
+}
+
+.pp-hero__summary {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-normal);
+  color: var(--ink-2);
+  max-width: var(--measure);
+  margin-bottom: var(--sp-6);
+}
+
+/* The hero screenshot should dominate the first screen after the title. */
+.pp-hero__shot { margin-inline: calc(-1 * var(--page-x)); border-inline: 0; }
+
+/* --------------------------------------------------------------------------
+   Body sections
+   -------------------------------------------------------------------------- */
+
+.pp-section { padding-block: var(--sp-7); border-top: var(--hairline) solid var(--rule); }
+
+.pp-section__title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--sp-4);
+}
+
+.pp-section__lead {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-normal);
+  max-width: var(--measure);
+  margin-bottom: var(--sp-5);
+}
+
+.pp-prose { max-width: var(--measure); color: var(--ink-2); }
+.pp-prose p + p { margin-top: var(--sp-4); }
+
+/* Fill only the fields that have content; delete the rest of the row. */
+.pp-facts {
+  display: grid;
+  gap: var(--sp-4);
+  padding-block: var(--sp-4);
+  border-top: var(--hairline) solid var(--rule);
+  margin-top: var(--sp-5);
+}
+
+.pp-facts dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: var(--sp-1);
+}
+
+.pp-facts dd { margin: 0; color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   Figures
+   -------------------------------------------------------------------------- */
+
+.pp-figures { display: grid; gap: var(--sp-5); margin-top: var(--sp-5); }
+
+/* The one section allowed to break the rail entirely. */
+.pp-section--final .shot {
+  margin-inline: calc(-1 * var(--page-x));
+  border-inline: 0;
+}
+
+/* Page-structure breakdown: a labelled list, not a diagram. */
+.pp-structure { margin-top: var(--sp-5); border-top: var(--hairline) solid var(--rule); }
+
+.pp-structure li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: var(--sp-3);
+  align-items: baseline;
+  padding-block: var(--sp-3);
+  border-bottom: var(--hairline) solid var(--rule);
+  color: var(--ink-2);
+}
+
+.pp-structure li::before {
+  content: attr(data-step);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mono);
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   Footer navigation
+   -------------------------------------------------------------------------- */
+
+.pp-next {
+  display: grid;
+  gap: var(--sp-4);
+  padding-block: var(--sp-7);
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.pp-next__link {
+  display: grid;
+  gap: var(--sp-3);
+  align-items: center;
+}
+
+.pp-next__shot { inline-size: 8rem; }
+
+.pp-next__title {
+  font-size: var(--fs-3);
+  font-variation-settings: "wght" 560, "wdth" 96;
+}
+
+.pp-next__all {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.pp-next__all:hover { color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   Desktop
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 48em) {
+  .pp-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pp-figures--pair { grid-template-columns: 2fr 1fr; align-items: start; }
+}
+
+@media (min-width: 64em) {
+  .pp-hero__shot,
+  .pp-section--final .shot { margin-inline: 0; border-inline: var(--hairline) solid var(--rule-strong); }
+
+  .pp-body {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+
+  .pp-section { grid-column: 1 / -1; }
+
+  /* Label in the margin, content on the reading rail. */
+  .pp-section__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+
+  .pp-section__title { grid-column: 1 / span 3; }
+  .pp-section__content { grid-column: 4 / -1; }
+
+  .pp-next {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .pp-next__link { grid-template-columns: 8rem 1fr; }
+}

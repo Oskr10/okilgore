@@ -2,7 +2,9 @@
 
 Personal portfolio for a web developer working in WordPress, Shopify, e-commerce, WebOps and technical support.
 
-**Status: Phase 1 — design system and homepage.** The six case-study pages are Phase 2 and are not built yet.
+**Web designer & developer portfolio.** Homepage plus five project pages. All
+project imagery and copy is currently marked-up placeholder — search the
+source for `[` to find every slot waiting on real content.
 
 Semantic HTML, modern CSS, vanilla JavaScript. No framework, no build step, no dependencies, nothing to install. Deploy by uploading the folder.
 
@@ -32,18 +34,23 @@ Static output with no build step, so any static host works as-is.
 ## Structure
 
 ```
-index.html                  Homepage (Phase 1 — complete)
-work/                       Case-study pages (Phase 2 — empty)
+index.html                  Homepage
+projects/                   Five case-study pages
+  landing-page-01..03/      Rich landing-page format
+  website-01..02/           Shorter full-website format
 resume/                     Resume PDF drop point
 assets/
   css/
     main.css                Tokens, reset, base type, layout primitives
     components.css          Every section and interactive component
     responsive.css          Breakpoint composition, pointer/print queries
+    atmosphere.css          Background pattern + cursor spotlight
     opening-hand.css        Opening Hand + Investigation Mode
+    project-page.css        Case-study pages only
   js/
     utils.js                Shared frame loop, pointer, resize bus
     theme.js                Palette wheel — popover, keyboard model, storage
+    atmosphere.js           Spotlight follow + touch section-parking
     cursor.js               Contextual cursor label
     magnetic.js             Pointer attraction for [data-magnetic]
     projects.js             Work index state + cursor-following preview
@@ -133,7 +140,101 @@ that request is cancelled on hide — otherwise a hide landing in that gap
 would be undone by the queued callback, leaving the image visible with no
 loop running to move or dismiss it.
 
+
 ---
+
+## Background pattern and spotlight
+
+A 32px cross pattern sits behind the whole page, and on a fine pointer the
+cursor tints it.
+
+**One formula covers all six palettes:**
+
+```css
+--pattern: color-mix(in srgb, var(--paper) 97%, var(--ink));
+```
+
+Because `--ink` is always the contrast colour of its theme, this darkens light
+palettes and lightens dark ones automatically. It lands at roughly 2.5 L* on
+light themes and 3.0 L* on dark — texture, not a grid. It is wrapped in
+`@supports` so browsers without `color-mix()` get no pattern at all rather
+than an unverified one.
+
+**The spotlight never repaints the screen.** The obvious build — a
+full-viewport radial gradient that follows the pointer — repaints everything
+every frame. Instead the mask is computed once on a fixed parent, and a 900px
+gradient child is moved inside it with `translate3d` only:
+
+```
+.atmos            fixed, full-screen, mask = cross pattern   ← computed once
+  .atmos__base    flat --pattern colour
+  .atmos__glow    900×900 radial gradient, transform-only
+```
+
+Because the mask clips both children to 1px strokes, the accent can only ever
+appear inside the crosses. There is no visible circle and no blob following
+the cursor. It runs on the existing shared rAF loop in `utils.js` — no new
+listener, no second loop.
+
+On touch there is no tracking at all: the glow parks at per-section positions
+via `IntersectionObserver`, and under `prefers-reduced-motion` it parks once
+and never moves.
+
+### Contrast — this moved four tokens
+
+Putting a pattern behind text changes the effective background, so every text
+tone was re-checked against it.
+
+That check also caught a pre-existing problem: `--ink-3` was **already**
+failing AA against `--paper-sunk` (4.41–4.43:1 in the three light themes)
+before any pattern existed. The original palette check only tested `--ink-3`
+against `--paper`, so the sunk bands were never covered.
+
+Corrected values:
+
+| Palette | `--ink-3` was | now |
+|---|---|---|
+| Paper | `#6e6a5b` | `#676355` |
+| Blueprint | `#5d6b7d` | `#576475` |
+| Moss | `#666b57` | `#5f6451` |
+| Carbon | `#7c8794` | `#7e8995` |
+
+Every text tone now clears 4.5:1 against all five surfaces — `--paper`,
+`--paper-sunk`, `--card-bg`, the pattern, and the sunk-band pattern — in all
+five explicit palettes. Worst case across 100 combinations is **4.60:1**.
+
+---
+
+## Project pages
+
+Five case studies under `projects/`. The three landing pages get the richer
+format (overview → goal → design direction → page structure → responsive →
+implementation → final screens → role → result); the two full websites use a
+shorter flow.
+
+All five share one head, masthead and footer, generated from a single
+template so they stay byte-identical. Only `project-page.css` is specific to
+them — the masthead, theme wheel, background layers, footer, figure treatment
+and every token are reused from the homepage.
+
+**Paths are relative (`../../`), and this was verified by serving the whole
+site from a `/okilgore/` subdirectory** rather than by inspection, because
+GitHub Pages serves the repo from a subpath. Every asset, script and
+cross-link resolves.
+
+### Replacing the placeholders
+
+Search the source for `[` — every slot waiting on real content is bracketed
+and uppercase, e.g. `[LANDING PAGE 01 — PROJECT NAME]`, `[PLATFORM]`,
+`[SHORT DESCRIPTION.]`.
+
+Images live in `assets/images/placeholders/`. Replace the file, keep the
+`width`/`height` attributes accurate to the new image, and keep the hero
+screenshot eager (it is the LCP element — everything else is lazy).
+
+The **My role** section on each project page exists specifically to prevent
+ambiguity about what was designed versus implemented versus configured.
+Fill it in honestly; it is the section most likely to be read closely.
 
 ## Opening Hand
 

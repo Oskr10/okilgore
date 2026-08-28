@@ -131,6 +131,8 @@
     const isBug = card === CARDS.BUG;
     const backId = `oh-back-${card.id}`;
     const title = card.frontLabel.map(escape).join('<br>');
+    const titleClass = 'oh-card__title' +
+      (card.titleSize ? ' oh-card__title--' + card.titleSize : '');
     const action = isBug ? 'Investigate' : 'View';
 
     const classes = ['oh-card', `oh-card--${card.category.toLowerCase()}`];
@@ -162,7 +164,7 @@
           `<span class="oh-card__inner">` +
             `<span class="oh-card__face oh-card__face--front">` +
               `<span class="oh-card__meta" data-card-meta>${meta}</span>` +
-              `<span class="oh-card__title">${title}</span>` +
+              `<span class="${titleClass}">${title}</span>` +
               `<span class="oh-card__rule" aria-hidden="true"></span>` +
               `<span class="oh-card__foot">` +
                 `<span data-card-foot>${footLeft}</span>` +
